@@ -142,8 +142,13 @@ untouched — `node tools/verify.mjs` re-hashes all 71 files):
   port closed (netstat + refused connection). Rebuild with `node tools/derive.mjs`.
 - Boot test (opencli, default profile; mirror served on loopback with `npx serve`):
   the title screen renders — pixel-art scene, animated particles, zero console
-  messages — screenshot `docs/boot-2026-10-12.png`. **Actual gameplay could not be
-  reached from the mirror origin**: the client's first gate call
+  messages — screenshot `docs/boot-2026-10-12.png`. A full browser network log
+  cross-checks the closure: 23 same-origin requests during boot (entry, entry
+  JS/CSS, favicon, webmanifest, 12 sprite/art assets, 4 audio `.webm`), every one
+  present in `.upstream/manifest.json`; the only same-origin miss is the Cloudflare
+  Insights beacon's `/cdn-cgi/rum` telemetry (a static mirror has no CF edge —
+  404, `cdn-cgi` class, never captured, probe-neutral). **Actual gameplay could not
+  be reached from the mirror origin**: the client's first gate call
   (`POST /v1/guest` on the AWS API) fails CORS (`403 This page may not use the gate.`
   — the API's `access-control-allow-origin` is `https://aetherfall.dev` only), and
   the bundle's only localhost affordances (`?gate=`/`?zone=`) still require a realm
