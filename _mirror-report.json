@@ -1,0 +1,918 @@
+{
+  "start": "https://aetherfall.dev/",
+  "origin": "https://aetherfall.dev",
+  "gated": false,
+  "sessionRenewal": "none",
+  "requests": 208,
+  "fetched": 71,
+  "bytes": 16423492,
+  "paths": [
+    "assets/GLTFLoader-MfgfXc7d.js",
+    "assets/aether-crystal-CHVk1_wr.glb",
+    "assets/aether-shard-cluster-BuJBdwLY.glb",
+    "assets/ashen-deadtree-bIYsmHWm.glb",
+    "assets/ashwalker-sleeper-bSWaQ8F0.glb",
+    "assets/barrowdeep-entrance-BOoDrbaA.glb",
+    "assets/castle-tower-cryo-Czf7emDG.glb",
+    "assets/castle-tower-pyro-CLIsjPez.glb",
+    "assets/castle-tower-storm-Cww412im.glb",
+    "assets/castle-tower-void-DhzsR1Ci.glb",
+    "assets/castle-wall-CBQP60iP.glb",
+    "assets/cisterns-sluice-house-DDA9w6V8.glb",
+    "assets/crystal-altar-DXtgP0ju.glb",
+    "assets/emberdeep-vent-AfQHPWQV.glb",
+    "assets/epic-0-DJ1H8aBh.png",
+    "assets/epic-1-jXbyDEOm.png",
+    "assets/epic-2-evpDu7UD.png",
+    "assets/epic-3-DTeDwZBf.png",
+    "assets/epic-4-BSHXqPpe.png",
+    "assets/field-rock-BN1CMgR5.glb",
+    "assets/frost-pine-vz3I7Ilh.glb",
+    "assets/fx3d-DiRK8ozf.js",
+    "assets/gilded-folly-gates-gmJtDMjU.glb",
+    "assets/glade-bush-BdDbizca.glb",
+    "assets/glade-windmill-BgWLo7k4.glb",
+    "assets/glowcap-mushrooms-CzG8_lEu.glb",
+    "assets/ground-0-gzvWyZRD.png",
+    "assets/hall-cryo-Dbk7MleD.glb",
+    "assets/hall-of-the-circle-6kwtXtHm.glb",
+    "assets/hall-pyro-ZYHIF7BC.glb",
+    "assets/hall-storm-BZttGm4H.glb",
+    "assets/hall-void-BiXjRTXy.glb",
+    "assets/hd2d-FOjpdF4f.js",
+    "assets/holloway-CMcWwWa1.png",
+    "assets/hollowed-crystal-12s3STn8.glb",
+    "assets/index-BTsv3a2s.js",
+    "assets/index-CrHozmsT.css",
+    "assets/mana-0-DI3V-Lw5.png",
+    "assets/mana-1-9rE1dWUM.png",
+    "assets/marizon-cottage-C4Sg82Fo.glb",
+    "assets/marizon-fountain-CLHrDv7Z.glb",
+    "assets/marizon-gate-6kS1W6hU.glb",
+    "assets/marizon-lamp-D2Y1X8ks.glb",
+    "assets/marizon-shop-B6TxFOlw.glb",
+    "assets/marizon-townhouse-BhtCr_TV.glb",
+    "assets/oak-tree-C37CZMBQ.glb",
+    "assets/parchment-vwolfdog-8Hh_n-CJ.jpg",
+    "assets/raven-tj0bRhXa.png",
+    "assets/rimewell-grotto-B6xzm4_S.glb",
+    "assets/rune-pillar-CP24C4Ze.glb",
+    "assets/rune-pillar-broken--sg3TeVo.glb",
+    "assets/scenery.model_crystal-altar-DbFiH9cg.png",
+    "assets/scenery.model_hollowed-crystal-7MXhcKhh.png",
+    "assets/srw-DySSScg-.png",
+    "assets/stall-cloth-DZRjaS-x.glb",
+    "assets/stall-food-Cf9Lftr5.glb",
+    "assets/stall-magic-BFp4vzyI.glb",
+    "assets/town-tower-DXI8ssxI.glb",
+    "assets/town-wall-B1GngtcZ.glb",
+    "assets/warden-stone-CGGs9Wy-.glb",
+    "audio/music/marizon_fight.m4a",
+    "audio/music/marizon_fight.webm",
+    "audio/music/marizon_idle.m4a",
+    "audio/music/marizon_idle.webm",
+    "audio/music/title_theme.m4a",
+    "audio/music/title_theme.webm",
+    "audio/ui/start_chime.m4a",
+    "audio/ui/start_chime.webm",
+    "favicon.svg",
+    "index.html",
+    "manifest.webmanifest"
+  ],
+  "unresolved": [],
+  "unreachable": [
+    {
+      "status": 200,
+      "path": "assets/ground-0.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/epic-0.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/epic-1.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/epic-2.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/epic-3.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/epic-4.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/mana-0.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/mana-1.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/scenery.model_crystal-altar.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/scenery.model_hollowed-crystal.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/scenery.model_crystal-altar.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/scenery.model_hollowed-crystal.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "aether-crystal.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "sprite.png",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "aether-shard-cluster.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "ashen-deadtree.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "ashwalker-sleeper.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "barrowdeep-entrance.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "castle-tower-cryo.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "castle-tower-pyro.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "castle-tower-storm.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "castle-tower-void.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "castle-wall.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "cisterns-sluice-house.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "crystal-altar.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "emberdeep-vent.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "field-rock.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "frost-pine.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "gilded-folly-gates.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "glade-bush.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "glade-windmill.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "glowcap-mushrooms.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "hall-cryo.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "hall-of-the-circle.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "hall-pyro.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "hall-storm.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "hall-void.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "hollowed-crystal.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "marizon-cottage.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "marizon-fountain.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "marizon-gate.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "marizon-lamp.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "marizon-shop.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "marizon-townhouse.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "oak-tree.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "rimewell-grotto.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "rune-pillar-broken.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "rune-pillar.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "stall-cloth.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "stall-food.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "stall-magic.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "town-tower.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "town-wall.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "warden-stone.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/aether-crystal.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/aether-shard-cluster.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/ashen-deadtree.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/ashwalker-sleeper.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/barrowdeep-entrance.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-tower-cryo.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-tower-pyro.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-tower-storm.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-tower-void.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-wall.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/cisterns-sluice-house.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/crystal-altar.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/emberdeep-vent.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/field-rock.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/frost-pine.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/gilded-folly-gates.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/glade-bush.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/glade-windmill.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/glowcap-mushrooms.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-cryo.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-of-the-circle.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-pyro.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-storm.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-void.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hollowed-crystal.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-cottage.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-fountain.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-gate.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-lamp.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-shop.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-townhouse.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/oak-tree.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/rimewell-grotto.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/rune-pillar-broken.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/rune-pillar.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/stall-cloth.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/stall-food.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/stall-magic.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/town-tower.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/town-wall.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/warden-stone.json",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/aether-crystal.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/aether-shard-cluster.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/ashen-deadtree.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/ashwalker-sleeper.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/barrowdeep-entrance.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-tower-cryo.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-tower-pyro.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-tower-storm.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-tower-void.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/castle-wall.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/cisterns-sluice-house.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/crystal-altar.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/emberdeep-vent.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/field-rock.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/frost-pine.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/gilded-folly-gates.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/glade-bush.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/glade-windmill.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/glowcap-mushrooms.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-cryo.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-of-the-circle.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-pyro.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-storm.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hall-void.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/hollowed-crystal.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-cottage.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-fountain.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-gate.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-lamp.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-shop.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/marizon-townhouse.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/oak-tree.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/rimewell-grotto.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/rune-pillar-broken.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/rune-pillar.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/stall-cloth.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/stall-food.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/stall-magic.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/town-tower.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/town-wall.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    },
+    {
+      "status": 200,
+      "path": "assets/warden-stone.glb",
+      "probes": 1,
+      "note": "masked 404: the origin's SPA fallback served the entry HTML with HTTP 200 for this unhashed logical key (the served artifact is the hashed asset captured above, or an object inlined in the bundle)"
+    }
+  ],
+  "external": [
+    {
+      "what": "game API server (multiplayer ticket endpoint POST {server}/dev/ticket)",
+      "url": "https://t5xbd6rn22.execute-api.sa-east-1.amazonaws.com",
+      "note": "external runtime dependency in the bundle; stays external, never backfilled into the capture"
+    },
+    {
+      "what": "Google Fonts stylesheet + font files (Press Start 2P, Silkscreen, Pixelify Sans, Atkinson Hyperlegible)",
+      "url": "https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen&family=Pixelify+Sans:wght@400;600&family=Atkinson+Hyperlegible:wght@400;700&display=swap",
+      "note": "external CDN fonts referenced from index.html; stays CDN"
+    },
+    {
+      "what": "Cloudflare Insights beacon (injected into the HTML response for browser-shaped requests)",
+      "url": "https://static.cloudflareinsights.com/beacon.min.js",
+      "note": "external CDN script; the injected tag is part of the captured entry HTML, the beacon file itself stays CDN"
+    }
+  ]
+}

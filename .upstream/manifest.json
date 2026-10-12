@@ -1,0 +1,290 @@
+{
+  "generated": "2026-10-12T19:20:56.955Z",
+  "origin": "https://aetherfall.dev",
+  "files": {
+    "assets/aether-crystal-CHVk1_wr.glb": {
+      "bytes": 132,
+      "sha256": "b6d73b055d186b288b2495d291423e501e40ba7b38e1d1c01da434bca68bc89e"
+    },
+    "assets/aether-shard-cluster-BuJBdwLY.glb": {
+      "bytes": 132,
+      "sha256": "efd5f912113ec7367aebfb817dd72c7bed4b4a43168913709b227a2a902ec4a7"
+    },
+    "assets/ashen-deadtree-bIYsmHWm.glb": {
+      "bytes": 131,
+      "sha256": "fb9c203801d2b2774d159aae7dc2ab49b097dc0b9acf7b2a83596c52de053354"
+    },
+    "assets/ashwalker-sleeper-bSWaQ8F0.glb": {
+      "bytes": 132,
+      "sha256": "1d257c8ae66b2c65f9e064e0c54d110254c976e4d588d858bfb82c454376e5dc"
+    },
+    "assets/barrowdeep-entrance-BOoDrbaA.glb": {
+      "bytes": 132,
+      "sha256": "05ae2fa7acdc4609b26dad67e60fb6687a46e663a668eca8886104aed2408199"
+    },
+    "assets/castle-tower-cryo-Czf7emDG.glb": {
+      "bytes": 132,
+      "sha256": "bedb8670feb118717abb5aabee12242d7bae7675fc72d5770ec62ec1a85a5e6c"
+    },
+    "assets/castle-tower-pyro-CLIsjPez.glb": {
+      "bytes": 132,
+      "sha256": "f18b1dbd0cbd65423ce9ff3fa3e2c0f5c4c1e6b06675b3b990fe8b9d335dc3a4"
+    },
+    "assets/castle-tower-storm-Cww412im.glb": {
+      "bytes": 132,
+      "sha256": "7ba098e3901e01657fb051c9719b71fe0c88c9d9be21342e2b5fe6469613bffd"
+    },
+    "assets/castle-tower-void-DhzsR1Ci.glb": {
+      "bytes": 132,
+      "sha256": "96c15f8171f261847a2a62945d361bae3f75f18095ce583216875a8c6dd56bbc"
+    },
+    "assets/castle-wall-CBQP60iP.glb": {
+      "bytes": 131,
+      "sha256": "01146cc64dd6f9c7cc5694f511e5b86ebbdb57ec2f457f7c3b8b10fae0730a05"
+    },
+    "assets/cisterns-sluice-house-DDA9w6V8.glb": {
+      "bytes": 132,
+      "sha256": "927c2c46fea1e3306fdeb135f47113f1687ca82b9817c782eab6531e40564617"
+    },
+    "assets/crystal-altar-DXtgP0ju.glb": {
+      "bytes": 132,
+      "sha256": "b318571907e081cbf11003618848f78c6e0058040a99c9c5e47aafa68bd00887"
+    },
+    "assets/emberdeep-vent-AfQHPWQV.glb": {
+      "bytes": 132,
+      "sha256": "de0b3285c4eb5939c076613b60f056efc8b77107a285cd469980d6ebc534b6ad"
+    },
+    "assets/epic-0-DJ1H8aBh.png": {
+      "bytes": 675222,
+      "sha256": "5d6c1839101fa572093ac4837eb667b2e3d9817d1937b5097bd00036bbebb961"
+    },
+    "assets/epic-1-jXbyDEOm.png": {
+      "bytes": 850847,
+      "sha256": "ccf9b6cea54925f50a4ca2d1629a6e14e69555bbb6a86505679d496e4b436da9"
+    },
+    "assets/epic-2-evpDu7UD.png": {
+      "bytes": 768880,
+      "sha256": "307e2b9675866a56f6e9ec268cd347fb7c80ac6ee95136504e40f5319f7cb681"
+    },
+    "assets/epic-3-DTeDwZBf.png": {
+      "bytes": 944808,
+      "sha256": "c0cd3a2de5e0a91aff74cc722c3d7a593072a6b04c1b7c04c0dab87118ae8d29"
+    },
+    "assets/epic-4-BSHXqPpe.png": {
+      "bytes": 747650,
+      "sha256": "e39e2f5eafa10302b5399cf89d977ed3350db90e3ea6f4708997fe245cd4f6c5"
+    },
+    "assets/field-rock-BN1CMgR5.glb": {
+      "bytes": 131,
+      "sha256": "df0950a008ae26898b0d52fe7d1bea2075eaf5cbd0b8d1b67352086a9c26537f"
+    },
+    "assets/frost-pine-vz3I7Ilh.glb": {
+      "bytes": 132,
+      "sha256": "07ca9ace363ccec56c2424f9abf4a3c3731e7e415cc40980b180b12487a298e0"
+    },
+    "assets/fx3d-DiRK8ozf.js": {
+      "bytes": 668510,
+      "sha256": "45084955586e66711a60d92fdda95026c603913b4f4b58ac25e1d77121584e41"
+    },
+    "assets/gilded-folly-gates-gmJtDMjU.glb": {
+      "bytes": 132,
+      "sha256": "ea4f4da003eb340dcdbd94ee3bec5def1138f5080fb25b19be4683e1996263c1"
+    },
+    "assets/glade-bush-BdDbizca.glb": {
+      "bytes": 131,
+      "sha256": "3171097b64c04427c17de77a31aab5a006d7eabd3071b6e42396a983eb3d50f8"
+    },
+    "assets/glade-windmill-BgWLo7k4.glb": {
+      "bytes": 132,
+      "sha256": "d07e505f5cc4af6a20c4d98b1cb56fc571b24ec9d1602c6b05a898f696cc0335"
+    },
+    "assets/glowcap-mushrooms-CzG8_lEu.glb": {
+      "bytes": 132,
+      "sha256": "2ce50f25da8396dbe056f57643819edddd8f13ad02d981e71a95f5293a941a65"
+    },
+    "assets/GLTFLoader-MfgfXc7d.js": {
+      "bytes": 45220,
+      "sha256": "fcff8d2bc91d84737c85eed3a9d8ada4cd2dba3d563d6f349935e66e3ecc5976"
+    },
+    "assets/ground-0-gzvWyZRD.png": {
+      "bytes": 597511,
+      "sha256": "7a9ac5a6bc68dc852d2765ce78a4ac814dcf2f47db156bb2f485433e6e9475fd"
+    },
+    "assets/hall-cryo-Dbk7MleD.glb": {
+      "bytes": 132,
+      "sha256": "eb78eda5e736ffd29596fa15f1d821c531b1303c34e57f9279fa9a7b074514db"
+    },
+    "assets/hall-of-the-circle-6kwtXtHm.glb": {
+      "bytes": 132,
+      "sha256": "7cf955b4f2cadd981b484cda9eccaf04df561340a1ce0e1d534d7619e1f46175"
+    },
+    "assets/hall-pyro-ZYHIF7BC.glb": {
+      "bytes": 132,
+      "sha256": "9656ca9f1bfd0f8638b05175c2db76c51a3e9f49544704da59400720d7cb1246"
+    },
+    "assets/hall-storm-BZttGm4H.glb": {
+      "bytes": 132,
+      "sha256": "7a5e41a8b51ce3d5f8a04a7ce6f38f0dffa2be625a0b942092260a2a5fd85718"
+    },
+    "assets/hall-void-BiXjRTXy.glb": {
+      "bytes": 132,
+      "sha256": "ad4c2fdbcedc57b1e9cb2251d326f9199d6d19ed978830d16f60e47286ba09c5"
+    },
+    "assets/hd2d-FOjpdF4f.js": {
+      "bytes": 238932,
+      "sha256": "be6dc3ac0203de0fedcb9f0f97378d0f0e447de18fa07f0979476c7352a1211e"
+    },
+    "assets/holloway-CMcWwWa1.png": {
+      "bytes": 34568,
+      "sha256": "110f2490d0daa850d43e6b9e6c1e0f993e6c76f8aaae90878138f5476bec919b"
+    },
+    "assets/hollowed-crystal-12s3STn8.glb": {
+      "bytes": 132,
+      "sha256": "582a85db6f1e1b12fc9e4626e2fd7a23ffd29156321c0bc365a36078e3d94962"
+    },
+    "assets/index-BTsv3a2s.js": {
+      "bytes": 2945491,
+      "sha256": "57af0e11c6319d7191aa483ad953916946f3955903c543ef6dbd9e633c8cf8e6"
+    },
+    "assets/index-CrHozmsT.css": {
+      "bytes": 185608,
+      "sha256": "35bd63a1c650fc8cac825a04dc34ef5c5e92d6025035706d19d4106f54e1624f"
+    },
+    "assets/mana-0-DI3V-Lw5.png": {
+      "bytes": 1680196,
+      "sha256": "7e93d56e2798a786211f3b6cec29747072916eaa1bcfae8561dd9347ad7e634e"
+    },
+    "assets/mana-1-9rE1dWUM.png": {
+      "bytes": 45360,
+      "sha256": "c2a126736dda1186aa9b8796b2b306d7ae17ec67c0ddf3f4647904166f8a6b12"
+    },
+    "assets/marizon-cottage-C4Sg82Fo.glb": {
+      "bytes": 132,
+      "sha256": "583aed32f1c3a7b601bc4b94368632e959c6bcf1755555a30b8ad815a5117219"
+    },
+    "assets/marizon-fountain-CLHrDv7Z.glb": {
+      "bytes": 132,
+      "sha256": "4e96d5eaa6543a3f12ee25e65c981f9a9de9f63a45a201ab38c1c12ae0c61256"
+    },
+    "assets/marizon-gate-6kS1W6hU.glb": {
+      "bytes": 132,
+      "sha256": "bb95bcb6d1529bb64486de31ffa65c526aa4d0135a5dbea7b5b6b668dbb3b095"
+    },
+    "assets/marizon-lamp-D2Y1X8ks.glb": {
+      "bytes": 132,
+      "sha256": "cabadbfeb43d672fac5f5c9afeb16b082f7fe56117ca75d7f9b3a674dc32f5a8"
+    },
+    "assets/marizon-shop-B6TxFOlw.glb": {
+      "bytes": 132,
+      "sha256": "3f210962ac917357a9adc0649ea838f47ed7b969a9ecf2eb96c7a716b4262901"
+    },
+    "assets/marizon-townhouse-BhtCr_TV.glb": {
+      "bytes": 132,
+      "sha256": "ecc8ff52119c32507b2e19bd5c048bca75643192c95c836bf82101272784e11c"
+    },
+    "assets/oak-tree-C37CZMBQ.glb": {
+      "bytes": 132,
+      "sha256": "c656b8709818aafed36f795e53c36d6ee18998e53c28f9f5f1fd564899b3c98d"
+    },
+    "assets/parchment-vwolfdog-8Hh_n-CJ.jpg": {
+      "bytes": 323544,
+      "sha256": "85959adf7ab5ce37db0c171698fe88fbb6874d483e6b9e9def35f35b24df1c2d"
+    },
+    "assets/raven-tj0bRhXa.png": {
+      "bytes": 30705,
+      "sha256": "b0eb3c640116d686d0f1d172a8eac8ef23e7d8860de7b8c6a9acf3cd8353fbb8"
+    },
+    "assets/rimewell-grotto-B6xzm4_S.glb": {
+      "bytes": 132,
+      "sha256": "5a34f91c433dfdf57d2dea0e94378ba4fb990d3015be54d917eaf342408eabdd"
+    },
+    "assets/rune-pillar-broken--sg3TeVo.glb": {
+      "bytes": 131,
+      "sha256": "4cae22309597d134e64f05e8c094374af834f7c9221228f8c3327db402444706"
+    },
+    "assets/rune-pillar-CP24C4Ze.glb": {
+      "bytes": 131,
+      "sha256": "819efbd69b2954762c051b187f46cb68093ec15ecc3164b44d94a1532c7c1e45"
+    },
+    "assets/scenery.model_crystal-altar-DbFiH9cg.png": {
+      "bytes": 4273,
+      "sha256": "aaf7a3c3b36d5478bfd4d7cfff5622e65345effda733657f7ad3091fdc85bd8c"
+    },
+    "assets/scenery.model_hollowed-crystal-7MXhcKhh.png": {
+      "bytes": 6833,
+      "sha256": "ce7ee842ff02eca9f566c780b5bed8679089524806694b249cf6acc4469cda02"
+    },
+    "assets/srw-DySSScg-.png": {
+      "bytes": 66076,
+      "sha256": "9a2222c4f9f799f8ab7cfae2f6f55575b96dc261fede685b68e98451cd7bce18"
+    },
+    "assets/stall-cloth-DZRjaS-x.glb": {
+      "bytes": 132,
+      "sha256": "03e43dfc9ed676f22d37903be9e34faa2b130147a47a795f8b520dd4cf9d7491"
+    },
+    "assets/stall-food-Cf9Lftr5.glb": {
+      "bytes": 132,
+      "sha256": "2f2057a370f8a3d9595d11f28f56f4cad9f6fd7377af0d80b9ecdd190cd9f222"
+    },
+    "assets/stall-magic-BFp4vzyI.glb": {
+      "bytes": 132,
+      "sha256": "f3944e1352b0609fd553219fbdd97d2c73979394be59f123f8e413ba9d11b981"
+    },
+    "assets/town-tower-DXI8ssxI.glb": {
+      "bytes": 132,
+      "sha256": "4d6a5033341141e946427871457bf7e019be43c88d3ee2ae029245bc72f47b7e"
+    },
+    "assets/town-wall-B1GngtcZ.glb": {
+      "bytes": 131,
+      "sha256": "553d64ec26d91171ee3b1967f7917e49f149d3a5092af0e2d7b53f0345478cf1"
+    },
+    "assets/warden-stone-CGGs9Wy-.glb": {
+      "bytes": 131,
+      "sha256": "033a3853e577737fdada4a63b4f17b9f2c2241e5bc1b3c6375226d0d730696ee"
+    },
+    "audio/music/marizon_fight.m4a": {
+      "bytes": 1361837,
+      "sha256": "b38e6870df513e6a9e88f7a0f914d2a465efd4a87252a8410da7d8dd7ff7e456"
+    },
+    "audio/music/marizon_fight.webm": {
+      "bytes": 1093193,
+      "sha256": "bb0beb4562baf554443ffaa021ba5c82c16779524ebda6238d3d7c8f29e2bebd"
+    },
+    "audio/music/marizon_idle.m4a": {
+      "bytes": 1325968,
+      "sha256": "b4b2ee1f1f2699c2f49029e627010457ca4c4a3485107d6c944b1377f303fa57"
+    },
+    "audio/music/marizon_idle.webm": {
+      "bytes": 1098302,
+      "sha256": "71e72a3c77185df467ac184e12868712042f171d36063c64dc0329a7c764f10d"
+    },
+    "audio/music/title_theme.m4a": {
+      "bytes": 340115,
+      "sha256": "c0e5bcc4ac87b05b09cec31cfcd29c397dd3bf30ed954f2c9d34bd9285120b49"
+    },
+    "audio/music/title_theme.webm": {
+      "bytes": 292516,
+      "sha256": "17c0debdf774898c76f7c73d68f68c980e6976bfa376f163675b2f4d5403e303"
+    },
+    "audio/ui/start_chime.m4a": {
+      "bytes": 26847,
+      "sha256": "3360bc71e961f73af667afdfc294df3987693c590402028d81c7ab67dcadab18"
+    },
+    "audio/ui/start_chime.webm": {
+      "bytes": 16607,
+      "sha256": "5e7482f00d7259fe1118631b566351a92ad6ebd997bf9ba649cc5688c835f9d0"
+    },
+    "favicon.svg": {
+      "bytes": 428,
+      "sha256": "836a56ffa559ea5ccd0fafefe9d02ca44196bfa8bdacfd1e48d6a5f7cfe85c18"
+    },
+    "index.html": {
+      "bytes": 1710,
+      "sha256": "b169e1d46bb891f91f856876ce7a7aecf4fd8b55d5ab4e49ad38b58b7b9b0704"
+    },
+    "manifest.webmanifest": {
+      "bytes": 331,
+      "sha256": "c52c414f05c8022cf7540790f334ac96cbb81aec9ebb0d2227a91d4c54303cf6"
+    }
+  }
+}
