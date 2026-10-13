@@ -4,18 +4,24 @@ Full mirror of **AETHERFALL** (https://aetherfall.dev/).
 
 Source: https://aetherfall.dev/
 
-![AETHERFALL boot evidence](docs/boot-2026-10-12.png)
+![AETHERFALL](docs/cover.png)
 
-> **Cover blocked (2026-10-12)** — AETHERFALL is a server-authoritative multiplayer
-> MMO: gameplay runs against a live realm backend (AWS API gate + Convex + zone
-> websocket) that is not capturable and whose gate CORS-locks its origin to
-> `https://aetherfall.dev` (a localhost/mirror origin gets `403 "This page may not
-> use the gate."`). Served from the mirror origin the client boots and renders its
-> title screen (the image above is real boot evidence from this mirror), but it
-> cannot pass the gate, so no gameplay screenshot from the mirror exists.
-> `docs/cover.png` is intentionally **not fabricated** (PLAN §7 rejects menu/title
-> shots as covers). Re-shoot the cover if the client ever gains an offline mode or a
-> local gate; until then the boot evidence above is the mirror's visual.
+> **Cover note (2026-10-13).** The image above is real gameplay captured from
+> the **live origin** (`https://aetherfall.dev/`), not from this mirror: the
+> pyromancer *dada* walking the night meadow of Marizon with the live HUD
+> (VITALITY 90/90, AETHER 100/100, the fire-spell action bar, the "Prologue ·
+> The Night of Keys" quest panel, the Marizon minimap and the zone status
+> `zone online · marizon-3 · ms · 1 mages · 2 foes · drift 0.03 · v0.7.16`).
+> The block is unchanged and re-confirmed on the mirror: served on loopback
+> the client boots and renders its title screen, but its first gate call
+> (`POST /v1/guest` on the AWS API) is refused — `403 "This page may not use
+> the gate."` for `Origin: http://127.0.0.1:4325`, while the same request from
+> `Origin: https://aetherfall.dev` is answered (`access-control-allow-origin:
+> https://aetherfall.dev`) — and the realm backend (Convex + zone websocket)
+> is not part of the capture either. The live origin's client is the same
+> build captured here (`v0.7.16`); the cover is that run. The mirror's capture
+> bytes are unaffected (`node tools/verify.mjs` → 71 files, 0 problems).
+> Boot evidence from the mirror itself stays at `docs/boot-2026-10-12.png`.
 
 ## Stack
 
@@ -44,6 +50,7 @@ AETHERFALL — "an epic pixel-art fantasy MMO RPG" (manifest.webmanifest), title
 - `tools/update.mjs` — read-only drift probe against the live site
 - `tools/verify.mjs` — re-hash the capture against the manifest
 - `tools/audit.js` — integrity gate for the derived layers (`AUDIT PASS`)
+- `docs/cover.png` — the cover (real gameplay, shot from the live origin 2026-10-13)
 - `docs/boot-2026-10-12.png` — boot evidence (title screen rendered by this mirror)
 - `_mirror-report.json` — crawl record (probes, closure, unreachable, external)
 
@@ -64,7 +71,7 @@ npx serve .
 ```
 
 Open the served root in a browser. The client boots and renders; entering the world
-needs the live realm backend (see *Cover blocked* / *External dependencies*). When
+needs the live realm backend (see the *Cover note* / *External dependencies*). When
 served from `localhost` the bundle allows a dev gate override — `?gate=https://…`
 — and a zone override `?zone=off` / `?zone=<url>`, both by design of the shipped
 client; neither substitutes for the missing backend.
@@ -152,8 +159,9 @@ untouched — `node tools/verify.mjs` re-hashes all 71 files):
   (`POST /v1/guest` on the AWS API) fails CORS (`403 This page may not use the gate.`
   — the API's `access-control-allow-origin` is `https://aetherfall.dev` only), and
   the bundle's only localhost affordances (`?gate=`/`?zone=`) still require a realm
-  server (Convex + zone websocket) that is not part of the capture. Cover marked
-  blocked — see the note at the top; do not fake it.
+  server (Convex + zone websocket) that is not part of the capture. The cover was
+  therefore shot from the live origin (see the cover note at the top); the mirror
+  itself never reaches gameplay.
 - §0.4 fork-over-mirror checked 2026-10-12: the page and every captured JS/CSS/HTML
   file reference **no public source repo** (no github.com/gitlab/bitbucket/source-repo
   strings anywhere; the only absolute links are docs.convex.dev, react.dev error
