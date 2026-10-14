@@ -43,13 +43,31 @@ AETHERFALL — "an epic pixel-art fantasy MMO RPG" (manifest.webmanifest), title
 
 - `.upstream/manifest.json` — sha256 for every captured file (71 files)
 - `readable/` — prettified derived layer (pinned prettier 3.9.6): the four minified
-  chunks and the stylesheet (5 pretties, 233,892 lines)
+  chunks and the stylesheet (5 pretties, 233,892 lines), mirroring the served paths
+  (`readable/assets/<chunk>.pretty.js|css`; since 2026-10-14, no `__` flattening)
 - `src/` + `split-spec.json` — 339 statement-aligned slices of the app chunks with
-  the recorded derivation spec (6 wholeFile sections, 3 skipped sections)
-- `tools/derive.mjs` — rebuild `readable/` + `src/` + `split-spec.json`
+  the recorded derivation spec (6 wholeFile sections, 3 skipped sections); slices
+  live at their served paths under `src/assets/`
+- `rename-map.json` + `tools/names.json` — the recorded semantic rename layer
+  (campaign closed 2026-10-14): the reviewed list and the mechanically recovered
+  map `tools/derive.mjs` re-applies on every re-cut
+- `tools/derive.mjs` — rebuild `readable/` + `src/` + `split-spec.json` (re-applies
+  the rename map; archives superseded derived files to `legacy/<date>/`)
+- `tools/names.json` / `tools/apply-names.mjs` / `tools/recover-scoped-map.mjs` /
+  `tools/verify-rename.mjs` / `tools/check-chunk.mjs` / `tools/refcheck.mjs` /
+  `tools/engine/rename-layer.mjs` — the rename campaign writer, map recovery and
+  reconstruction gates (pipeline: apply → recover → derive → gates)
+- `tools/probe-structure.mjs` — read-only bundle-shape probe (the 2026-10-14
+  structure decision evidence); `tools/lib-acorn.mjs` — authoring-time parser
+  (installs into gitignored `tools/.deps/`)
 - `tools/update.mjs` — read-only drift probe against the live site
 - `tools/verify.mjs` — re-hash the capture against the manifest
+- `tools/record-manifest.mjs` — re-walk/re-check the Gen-A manifest (canonical
+  SKIP/NOT_CAPTURED sets; `--check` proves no derived path leaks)
 - `tools/audit.js` — integrity gate for the derived layers (`AUDIT PASS`)
+- `tools/serve.mjs` — static server for the boot/serve probe (default port 4325)
+- `legacy/2026-10-14/` — the superseded derived layers, byte-exact (proposal (o):
+  the flattened 2026-10-12 `readable/` + `src/` and the pre-rename slices)
 - `docs/cover.png` — the cover (real gameplay, shot from the live origin 2026-10-13)
 - `docs/boot-2026-10-12.png` — boot evidence (title screen rendered by this mirror)
 - `_mirror-report.json` — crawl record (probes, closure, unreachable, external)
@@ -79,8 +97,12 @@ client; neither substitutes for the missing backend.
 ## Verify
 
 ```
-node tools/verify.mjs     # re-hash the capture against the manifest
-node tools/audit.js       # derived-layer integrity gate
+node tools/verify.mjs                # re-hash the capture against the manifest
+node tools/audit.js                  # derived-layer integrity gate (AUDIT PASS)
+node tools/derive.mjs --check        # byte-compare a fresh re-cut (write nothing)
+node tools/record-manifest.mjs --check  # manifest walk: no derived path leaks
+node tools/verify-rename.mjs --all   # rename map reproduces + references/bindings
+node tools/check-chunk.mjs --all     # cross-slice calls resolve after renames
 ```
 
 ## Updating from upstream
@@ -95,7 +117,12 @@ only injects the Insights beacon into browser-shaped HTML requests — the captu
 taken that way) and the beacon tag is normalized on both sides; the origin has an SPA
 fallback, so a 200 answer that is HTML on a non-HTML capture rel is reported as
 `html-fallback (masked 404 upstream)`, never accepted. Refreshing means re-running the
-fetch into a clean tree and re-cutting the derived layers on top of the new build.
+fetch into a clean tree, re-cutting the derived layers on top of the new build
+(`node tools/derive.mjs` — it re-applies the recorded rename map where the ranges
+still align and archives superseded files to `legacy/<date>/`) and re-running the
+rename pipeline (`apply → recover → derive → gates`) with the review list adapted
+to the new build; a stale map fails loudly (derive/audit refuse), it never
+mis-renames silently.
 
 ### 2026-10-12 readable/src derivation
 
@@ -105,20 +132,25 @@ untouched — `node tools/verify.mjs` re-hashes all 71 files):
 - `readable/` — pinned prettier 3.9.6 (module API, default options — never the CLI,
   it respects `.gitignore` and can silently echo its input) rendered the four
   minified chunks + the stylesheet to 5 pretties (233,892 lines total; capture-root
-  names, dirs flattened with `__`). Every pretty is provably not a byte copy of its
+  names — the initial cut flattened the dirs with `__`, superseded 2026-10-14 by
+  served-path mirroring, see the pass below). Every pretty is provably not a byte copy of its
   capture source. One nuance recorded in `split-spec.json`: prettier 3.9.6 needs a
   **second pass** on one member-chain region of the index chunk (pass 1 → pass 2
   differ, pass 2 is a fixed point), so derive and audit both iterate to the fixed
   point instead of claiming single-pass; audit re-renders all 5/5 pretties
-  byte-exact under the pinned version.
-- `src/` — 339 statement-aligned slices (`src/<tag>-NN.js`, exact 2-line provenance
+  byte-exact under the pinned version (the 2026-10-14 pass keeps iterating — the
+  index chunk records 3 format calls until the fixed point is confirmed).
+- `src/` — 339 statement-aligned slices (`src/assets/<chunk>-NN.js` since the
+  2026-10-14 pass, exact 2-line provenance
   header) recorded in `split-spec.json` (348 sections): 339/339 parse standalone
   (`node --input-type=module --check -`) and round-trip byte-exact to their readable
-  line ranges. Cuts land only on top-level declaration boundaries (~250–350 line
+  line ranges (through the recorded rename map where renamed). Cuts land only on
+  top-level declaration boundaries (~250–350 line
   windows); oversized single declarations stay whole (largest:
-  `assets__index-BTsv3a2s-126.js`, 21,411 lines — the asset-URL map + a giant
-  data-table declaration the minifier kept as one statement). Identification is the
-  bundle's own minified names — the rename campaign (PLAN §5) remains an open task.
+  `src/assets/index-BTsv3a2s-126.js`, 21,411 lines — the asset-URL map + a giant
+  data-table declaration the minifier kept as one statement). Identifiers are the
+  bundle's own minified names, except where the rename campaign (PLAN §5, closed
+  2026-10-14 — see the pass below) replaced them with reviewed semantic names.
 - Vendor rule — wholeFile sections, never sliced: the three.js `GLTFLoader` addon
   chunk (`assets/GLTFLoader-MfgfXc7d.js`, whole file) and the bundled three.js r186
   engine region inside `assets/fx3d-DiRK8ozf.js` (three.core/three.module up to and
@@ -168,12 +200,125 @@ untouched — `node tools/verify.mjs` re-hashes all 71 files):
   docs, fonts, the Cloudflare beacon and the deployed AWS endpoint), so there is
   nothing to fork and the mirror stands.
 
+### 2026-10-14 structure + rename pass (served paths; campaign closed)
+
+**Structure decided from BYTES** (`tools/probe-structure.mjs`, read-only): real
+`import`/`export` specifiers (fx3d imports its shared bindings from
+`./index-BTsv3a2s.js`; the runtime dynamic-imports fx3d/hd2d through the entry's
+`__vite__mapDeps` table), **0** module-factory signatures (no
+`__webpack_require__`/Turbopack), **0** `sourceMappingURL` and **0** `*.map`
+files — flat Vite production ES modules, so statement-aligned slices stay the
+true boundary (the taipei-rush-tokyo / clawd-rpg flat-ESM precedent; the
+factory-family split is inapplicable). The capture preserves the served URL
+structure (`index.html`, `assets/`, `audio/` at the root), so the derived layers
+now **mirror the served paths** (PLAN §5 served-path paragraph):
+`readable/assets/<chunk>.pretty.js|css` and `src/assets/<chunk>-NN.js` — no more
+`__` flattening. The vendor/machinery bands stay wholeFile exactly as recorded
+(entry chunk-machinery head + React 19.3.0 region, fx3d three.js r186 region,
+hd2d mapDeps head, the whole GLTFLoader addon chunk, the stylesheet); the three
+final `export {…}` tables stay skipped sections, reached through the recorded
+`renameBindings`.
+
+**Superseded layers archived** (proposal (o), both layers, byte-exact):
+`legacy/2026-10-14/readable/` + `legacy/2026-10-14/src/` carry the flattened
+2026-10-12 cut (344 files) plus the 8 pre-rename slices whose provenance-marker
+word changed when derive recomputed it on the renamed body. Nothing was
+dropped; the capture bytes are untouched.
+
+**Rename campaign (the previously-open PLAN §5 task) — CLOSED.** No upstream
+maps exist (0 `sourceMappingURL` / 0 `*.map`), so every name is evidence-based.
+The campaign's priority was the multiplayer client's gate/realm layer, named so
+the code reflects the captured reality — the live backend is **external** (the
+AWS API gate, the Convex deployment, the zone websocket) and the mirror carries
+only the client: `GateClient`/`GateError`/`gateBaseUrl` (the `?gate=` override
+falling back to the deployed AWS endpoint), `ZoneClient`/`ZoneError`/
+`normalizeZoneUrl`/`fetchDevTicket` (the `/v1/rooms/<room>/ws` socket, the
+`?zone=`/`?room=` overrides, the `/dev/ticket` dev seat), the device-token
+identity (`deviceToken`/`rotateDeviceToken`/`DEVICE_TOKEN_KEY`), the realm
+session store (`realmSession`/`setSession`/`useRealmSession`/
+`connectGateSession`/`refreshRoster`/`enterCharacter`/`realmRequest`/
+`activeZone`), the record mappers (`hydratePlayer`/`toOwnedItem`/`withAffixes`/
+`toInventoryView`/`mergeChatLines`/`altarRiteEvents`) and the backend adapters
+(`awsBackend`/`convexBackend`/`activeBackend` + the `aws*Unsupported` stubs that
+name the AWS-realm limitations verbatim). The renderer chunks got their cores:
+`createFx3D`/`createHd2d` (renamed to the chunks' own export names — the export
+tables are reached via `renameBindings`, turfwar's (t)(1)), `Fx3dLayer`/`FxKit`/
+`GolemFx`/`MageFx`, `Hd2dRenderer`/`TextureAtlas`/`packAtlas`, the
+element-palette layer (`parseHexColor`/`paletteColor`/`buildPaletteTexture`/
+`ELEMENT_COLORS`/`elementColor`), the quality caps and hd2d plumbing
+(`QUALITY_TIERS`/`MAX_POINT_LIGHTS`/`MAX_LINE_LIGHTS`/`ATLAS_SIZE`/`QUAD_VERTS`/
+`SHARPEN_GLSL`/`HD_SPACE`, …) and the math helpers (`rand`/`clamp01`/
+`smoothstep`/`TAU`/`WORLD_SCALE`/`PIXELS_PER_UNIT`/`lightFalloff`). Totals:
+**115 reviewed names / 883 identifier splices over 41 slices** (221
+word-boundary rename records + 7 indexed names over 55 occurrences; the
+recovered `rename-map.json` is re-applied by `tools/derive.mjs` on every
+re-cut). **Vendor rule** — the wholeFile bands and the minifier-merged bundled
+**Convex client region** inside the entry chunk (~lines 104993-105775 of the
+pretty: the codec/react-client incl. `ConvexError` and its generated-api
+machinery) are third-party bytes and were **never renamed**. Remaining below
+the review frontier: ~4,050 eligible program-scope names in the entry chunk
+(its mapDeps'd vendor-adjacent machinery and the bulk of the game code), ~470
+in hd2d, ~86 in fx3d — kept minified, annotated as the next sub-task (the
+fleet precedent). A capture refresh will need the campaign re-authored against
+the new build (derive re-applies the map only while the ranges align).
+
+Gate tails, verbatim (2026-10-14):
+
+```
+node tools/verify.mjs
+71 files checked, 0 problems
+```
+```
+node tools/audit.js
+AUDIT PASS — 348 spec sections (339/339 src↔pretty round-trips byte-exact, 41 through the recorded rename map, 5/5 pretty sources tiled contiguously, 3/3 skipped loader/merged/export sections re-verified textually, 339/339 src slices + 4/4 readable/*.pretty.js parse standalone (node --input-type=module --check -), 5/5 pretties provably distinct from their capture source, 5/5 sources provenanced, 9 index-only wholeFile/skipped sections carry no src file, 0 inline content block(s) (twins + index-inline-map.json cross-checked), 3/3 imports resolve inside the capture (0 whitelisted machinery), 4/4 renameBindings name(s) re-found in skipped sections + binding map applies, 5/5 pretties re-render byte-exact under pinned prettier 3.9.6 (fixed point), capture manifest free of derived layers)
+```
+```
+node tools/derive.mjs --check
+derive: 5 readable file(s), 339 src slices (339/339 parse standalone, 339/339 round-trip byte-exact), 3 skipped, 5 wholeFile, 4 pretty js parse clean, 0 orphan(s) pruned — self-check clean [--check: write nothing]
+```
+```
+node tools/apply-names.mjs --all --dry
+apply-names: 339 file(s) visited, 0 changed, 0 rule group(s), 883 identifier splice(s) (app: 115 name(s) over 3 chunk(s), 883 splice(s)) (dry run)
+```
+```
+node tools/recover-scoped-map.mjs
+recover: 339 slice(s) aligned (1,655,766 identifier/token positions), 41 renamed slice(s) — 221 word-boundary record(s), 7 indexed name(s) over 55 occurrence(s)
+```
+```
+node tools/verify-rename.mjs --all
+verify-rename: 339/339 slice(s) reproduce byte-exact, 41 renamed slice(s) (55 indexed occurrence(s)), 3/3 chunk(s) references+bindings YES
+```
+```
+node tools/check-chunk.mjs --all
+check-chunk: 3 chunk(s), 339 slice body(ies) substituted — all cross-slice calls resolve
+```
+```
+node tools/record-manifest.mjs --check
+record-manifest --check: PASS — 71 capture file(s) recorded, walk agrees byte-for-byte, no derived path leaked
+```
+```
+serve probe (tools/serve.mjs on 4325)
+9/9 byte-identical over HTTP, 404 OK        (port 4325 closed after the probe)
+```
+
+**Honest gaps (2026-10-14).** The backend reality is unchanged: the guest gate
+is CORS-locked to `https://aetherfall.dev` (verified 403 from loopback) and the
+realm (Convex + zone websocket) is not part of the capture, so actual gameplay
+still cannot be reached from the mirror origin — the cover remains the live
+run, boot evidence stays `docs/boot-2026-10-12.png`, and the only boot probe
+here is HTTP-level (serve byte-compare + port close). The rename frontier above
+is the recorded next sub-task; renames never touch the capture bytes
+(`verify.mjs` re-hashes all 71 files after every pass).
+
 ## Mirror conventions
 
 - **Capture layer** — the captured files are byte-exact copies of what the
   origin served; nothing in them is edited (including the 132-byte LFS stubs).
 - **Readable layer** — `readable/` is derived (prettified) and never shipped to a
-  browser; it exists so the bundle can actually be read.
+  browser; it exists so the bundle can actually be read, and it keeps the served
+  paths (`readable/assets/…`). It stays pristine: only `src/` carries the reviewed
+  semantic names of the rename campaign (`tools/names.json`), and
+  `rename-map.json` is the mechanically recovered record every re-cut re-applies.
 - **Provenance** — `.upstream/manifest.json` records sha256 for each captured
   artifact, and `tools/verify.mjs` re-checks it.
 - **Drift** — `tools/update.mjs` is read-only: it reports what changed upstream
