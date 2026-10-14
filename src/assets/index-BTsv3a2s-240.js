@@ -89,7 +89,7 @@ function a5() {
   return (0, v.useSyncExternalStore)(bG, yG, yG);
 }
 function o5({ touch: e, muted: t }) {
-  let n = WW.name === `aws`,
+  let n = activeBackend.name === `aws`,
     { map: r, binds: i } = a5(),
     { holdBlink: a, autoAim: o } = (0, v.useSyncExternalStore)(xl, _l, _l);
   if (e)

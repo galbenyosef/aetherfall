@@ -154,7 +154,7 @@ void bbSplit(out vec4 solid, out vec4 soft) {
   Ft = `${B}
 #define BB_WHOLE 0.999
 ${lt}
-${wt}
+${WARP_GLSL}
 ${Pt}
 uniform float uBbK;
 uniform vec2 uBbRes;

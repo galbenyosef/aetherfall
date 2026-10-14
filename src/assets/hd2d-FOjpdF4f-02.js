@@ -1,6 +1,6 @@
 // hd2d-FOjpdF4f 02 — float
 // Lines 163-510 of readable/assets/hd2d-FOjpdF4f.pretty.js (statement-aligned).
-var et = class {
+var TextureAtlas = class {
     pages = [];
     textures = [];
     singles = new Map();
@@ -20,7 +20,7 @@ var et = class {
     }
     pack() {
       let e = [...this.wantSingle.map((e) => [e]), ...this.wantGroup],
-        { at: t, pages: n } = $e(
+        { at: t, pages: n } = packAtlas(
           e.map((e) => e.map((e) => ({ w: e.width, h: e.height }))),
         ),
         r = n.map((e) => {
@@ -302,7 +302,7 @@ vec3 hdLightSolid(vec3 P, vec3 N) {
 }
 `,
   dt = null;
-function ft() {
+function getShadowDepthTexture() {
   return (
     dt ||
       ((dt = new Ye(1, 1, be)),
@@ -311,7 +311,7 @@ function ft() {
     dt
   );
 }
-function pt() {
+function createHd2dUniforms() {
   return {
     uAmb: { value: 0.5 },
     uSun: { value: 0.5 },
@@ -325,14 +325,14 @@ function pt() {
     uPtN: { value: 0 },
     uLn: { value: Array.from({ length: 48 }, () => new j()) },
     uLnN: { value: 0 },
-    uSunStatic: { value: ft() },
-    uSunDynamic: { value: ft() },
+    uSunStatic: { value: getShadowDepthTexture() },
+    uSunDynamic: { value: getShadowDepthTexture() },
     uSunMat: { value: new N() },
     uSunTexel: { value: new P(1, 1) },
     uShadowOn: { value: 0 },
     uShadowStr: { value: 0.55 },
     uShadowSoft: { value: 0 },
-    uHero: { value: ft() },
+    uHero: { value: getShadowDepthTexture() },
     uHeroOn: { value: 0 },
     uHeroFar: { value: 1 },
     uHeroFade: { value: 0 },

@@ -172,15 +172,15 @@ void main() {
         (this.maxEnd = 0));
     }
   },
-  wd = 16,
-  Td = 0.6 * wd,
-  Ed = 0.4 * wd,
+  PIXELS_PER_UNIT = 16,
+  Td = 0.6 * PIXELS_PER_UNIT,
+  Ed = 0.4 * PIXELS_PER_UNIT,
   Dd = Math.PI * 2,
   Od = 0.35,
-  $ = (e, t) => e + Math.random() * (t - e),
-  kd = (e) => Math.max(0, Math.min(1, e)),
-  Ad = (e, t, n) => {
-    let r = kd((n - e) / (t - e));
+  rand = (e, t) => e + Math.random() * (t - e),
+  clamp01 = (e) => Math.max(0, Math.min(1, e)),
+  smoothstep = (e, t, n) => {
+    let r = clamp01((n - e) / (t - e));
     return r * r * (3 - 2 * r);
   },
   jd = new W(),
@@ -189,7 +189,7 @@ void main() {
   Pd = new It(),
   Fd = new W(1, 0, 0),
   Id = new W(0, 0, 1),
-  Ld = {
+  ELEMENT_COLORS = {
     pyro: Q.ember,
     cryo: Q.rime,
     storm: Q.storm,
@@ -198,9 +198,9 @@ void main() {
     paladin: Q.gilt,
     scout: Q.rime,
   },
-  Rd = (e) => Ld[e] ?? Q.aether,
-  zd = (e, t, n) => [e * wd, t * wd + n, n],
-  Bd = class {
+  elementColor = (e) => ELEMENT_COLORS[e] ?? Q.aether,
+  toLayerPoint = (e, t, n) => [e * PIXELS_PER_UNIT, t * PIXELS_PER_UNIT + n, n],
+  MageFx = class {
     kit;
     bolts = new Map();
     rifts = new Map();
@@ -226,7 +226,7 @@ void main() {
       this.L.particles.emit(e, this.kit.now);
     }
     near(e, t, n) {
-      return n || Math.hypot(this.me.x - e / wd, this.me.y - t / wd) < 10;
+      return n || Math.hypot(this.me.x - e / PIXELS_PER_UNIT, this.me.y - t / PIXELS_PER_UNIT) < 10;
     }
     later(e, t) {
       this.timers.push({ at: this.now + e, fn: t });
@@ -252,43 +252,43 @@ void main() {
     cast(e, t, r, i, o, s, c, l) {
       if ((n(e.id) || a(e.id)) && e.kind !== `nova` && e.kind !== `strike`)
         return;
-      let u = Rd(t),
-        d = zd(r, i, Td);
+      let u = elementColor(t),
+        d = toLayerPoint(r, i, Td);
       switch ((this.castFlash(u, d), e.kind)) {
         case `nova`: {
-          let n = (e.radius ?? 3) * wd;
+          let n = (e.radius ?? 3) * PIXELS_PER_UNIT;
           t === `cryo`
-            ? this.glacialRing(r * wd, (i + 0.6) * wd, n, l)
-            : this.flameNova(u, r * wd, (i + 0.6) * wd, n, l);
+            ? this.glacialRing(r * PIXELS_PER_UNIT, (i + 0.6) * PIXELS_PER_UNIT, n, l)
+            : this.flameNova(u, r * PIXELS_PER_UNIT, (i + 0.6) * PIXELS_PER_UNIT, n, l);
           break;
         }
         case `strike`: {
-          let n = (e.radius ?? 2) * wd,
+          let n = (e.radius ?? 2) * PIXELS_PER_UNIT,
             r = e.delay ?? 0.6;
           e.id === `thunder` || t === `storm`
-            ? this.gather(o * wd, s * wd, n, r, l)
+            ? this.gather(o * PIXELS_PER_UNIT, s * PIXELS_PER_UNIT, n, r, l)
             : e.id === `judgement`
-              ? this.gather(o * wd, s * wd, n, r, l, Q.gilt)
-              : this.meteorCall(o * wd, s * wd, n, r);
+              ? this.gather(o * PIXELS_PER_UNIT, s * PIXELS_PER_UNIT, n, r, l, Q.gilt)
+              : this.meteorCall(o * PIXELS_PER_UNIT, s * PIXELS_PER_UNIT, n, r);
           break;
         }
         case `chain`:
-          this.chain(u, [d, ...c.map((e) => zd(e.x, e.y, Ed))], l);
+          this.chain(u, [d, ...c.map((e) => toLayerPoint(e.x, e.y, Ed))], l);
           break;
         case `drain`:
-          this.drain(zd(o, s, Ed), d, l);
+          this.drain(toLayerPoint(o, s, Ed), d, l);
       }
     }
     land(e, t, n, r, i) {
-      let a = (e.radius ?? 2) * wd;
+      let a = (e.radius ?? 2) * PIXELS_PER_UNIT;
       e.id === `thunder` || t === `storm`
-        ? this.thunder(n * wd, r * wd, a, i)
+        ? this.thunder(n * PIXELS_PER_UNIT, r * PIXELS_PER_UNIT, a, i)
         : e.id === `judgement`
-          ? this.thunder(n * wd, r * wd, a, i, Q.gilt)
-          : this.meteorImpact(n * wd, r * wd, a, i);
+          ? this.thunder(n * PIXELS_PER_UNIT, r * PIXELS_PER_UNIT, a, i, Q.gilt)
+          : this.meteorImpact(n * PIXELS_PER_UNIT, r * PIXELS_PER_UNIT, a, i);
     }
     impact(e, t, n, i = !1) {
-      let [a, o, s] = zd(e, t, Td),
+      let [a, o, s] = toLayerPoint(e, t, Td),
         c = i ? 1.8 : 1,
         l = this.kit;
       switch (n) {
@@ -340,7 +340,7 @@ void main() {
                 x: a,
                 y: o,
                 r0: 3,
-                r1: 1.6 * wd,
+                r1: 1.6 * PIXELS_PER_UNIT,
                 life: 0.35,
                 kind: bd.ring,
                 ramp: Q.ember,
@@ -349,7 +349,7 @@ void main() {
               }),
               l.radial(a, o, 2, 30, {
                 ramp: Q.ember,
-                speed: [1.6 * wd * 2.6, 1.6 * wd * 3],
+                speed: [1.6 * PIXELS_PER_UNIT * 2.6, 1.6 * PIXELS_PER_UNIT * 3],
                 drag: 3,
                 up: [5, 25],
                 life: [0.35, 0.5],
@@ -406,7 +406,7 @@ void main() {
             l.light(a, o, s, Q.storm, 2 * c, 26 * c, 0.3));
           for (let e = 0; e < 4 * c; e++) {
             let e = Math.random() * Dd,
-              t = $(6, 13);
+              t = rand(6, 13);
             this.bolt(
               [a, o, s],
               [a + Math.cos(e) * t, o + Math.sin(e) * t * r.fx, 0],
@@ -417,7 +417,7 @@ void main() {
                 rough: 0.25,
                 depth: 3,
                 branches: 0,
-                delay: $(0, 0.05),
+                delay: rand(0, 0.05),
               },
             );
           }
@@ -496,16 +496,16 @@ void main() {
     }
     arcs(e, t) {
       this.chain(
-        Rd(e),
-        t.map((e) => zd(e.x, e.y, Ed)),
+        elementColor(e),
+        t.map((e) => toLayerPoint(e.x, e.y, Ed)),
         !1,
       );
     }
     blink(e, t, n, r, i) {
       let a = this.kit,
-        o = Rd(e),
-        s = [t * wd, n * wd, 10],
-        c = [r * wd, i * wd, 10];
+        o = elementColor(e),
+        s = [t * PIXELS_PER_UNIT, n * PIXELS_PER_UNIT, 10],
+        c = [r * PIXELS_PER_UNIT, i * PIXELS_PER_UNIT, 10];
       (a.orbit(s[0], s[1], 18, {
         ramp: o,
         r: [8, 15],
@@ -571,12 +571,12 @@ void main() {
         this.emit({
           x: s[0] + (c[0] - s[0]) * t,
           y: s[1] + (c[1] - s[1]) * t,
-          z: 10 + $(-4, 4),
-          vx: $(-8, 8),
-          vy: $(-8, 8),
-          vz: $(-5, 10),
-          life: $(0.25, 0.5),
-          s0: $(1, 1.8),
+          z: 10 + rand(-4, 4),
+          vx: rand(-8, 8),
+          vy: rand(-8, 8),
+          vz: rand(-5, 10),
+          life: rand(0.25, 0.5),
+          s0: rand(1, 1.8),
           s1: 0.3,
           ramp: o,
           h0: 4,
@@ -747,7 +747,7 @@ void main() {
         let a = r.env
           ? r.env(i)
           : (i < 0.035 ? 1.3 : 0.7 + 0.3 * Math.random()) *
-            (1 - Ad(r.life - 0.1, r.life, i));
+            (1 - smoothstep(r.life - 0.1, r.life, i));
         if (a <= 0.01) continue;
         let o = md(r.seed + Math.floor(i * r.hz)),
           s = vd(r.a, r.b, r.rough, r.depth, o);
@@ -795,7 +795,7 @@ void main() {
           this.tendrils.splice(n, 1);
           continue;
         }
-        let a = Ad(0, r.fadeIn, i) * (1 - Ad(r.life - r.fadeOut, r.life, i));
+        let a = smoothstep(0, r.fadeIn, i) * (1 - smoothstep(r.life - r.fadeOut, r.life, i));
         for (let e of r.strands)
           t.strip(
             yd(r.a, r.b, 28, e.bow, e.amp, e.waves, -i * e.speed),
@@ -809,8 +809,8 @@ void main() {
     }
     newBolt(e) {
       let t = this.L,
-        n = Rd(e.school),
-        [r, i, a] = zd(e.x, e.y, Td),
+        n = elementColor(e.school),
+        [r, i, a] = toLayerPoint(e.x, e.y, Td),
         o = {
           orb: -1,
           shard: -1,
@@ -839,29 +839,29 @@ void main() {
     }
     fly(e, t) {
       let n = this.L,
-        [r, i, a] = zd(e.x, e.y, Td),
+        [r, i, a] = toLayerPoint(e.x, e.y, Td),
         o = Math.hypot(e.vx, e.vy) || 1,
         s = e.vx / o,
         c = e.vy / o,
-        l = o * wd;
+        l = o * PIXELS_PER_UNIT;
       ((t.light.x = r), (t.light.y = i), (t.light.z = a));
       let u = (e, t) => ({
-        vx: -s * l * e + $(-t, t),
-        vy: -c * l * e + $(-t, t),
+        vx: -s * l * e + rand(-t, t),
+        vy: -c * l * e + rand(-t, t),
       });
       switch (e.school) {
         case `pyro`:
           (n.orbs.set(t.orb, r, i, a, 4, s, c, 0, 1.4),
             this.every(t.acc, `flame`, 130, () =>
               this.emit({
-                x: r + $(-2, 2),
-                y: i + $(-2, 2),
-                z: a + $(-1.5, 1.5),
+                x: r + rand(-2, 2),
+                y: i + rand(-2, 2),
+                z: a + rand(-1.5, 1.5),
                 ...u(0.15, 12),
-                vz: $(10, 30),
+                vz: rand(10, 30),
                 drag: 2,
-                life: $(0.25, 0.45),
-                s0: $(2.8, 4),
+                life: rand(0.25, 0.45),
+                s0: rand(2.8, 4),
                 s1: 0.8,
                 ramp: Q.ember,
                 h0: 3.2,
@@ -876,15 +876,15 @@ void main() {
                 y: i,
                 z: a,
                 ...u(0.2, 30),
-                vz: $(20, 60),
+                vz: rand(20, 60),
                 grav: 120,
                 drag: 0.8,
-                life: $(0.4, 0.8),
-                s0: $(0.5, 0.8),
+                life: rand(0.4, 0.8),
+                s0: rand(0.5, 0.8),
                 ramp: Q.ember,
                 h0: 4,
                 h1: 2.5,
-                I: $(2, 4),
+                I: rand(2, 4),
                 shape: Z.spark,
                 stretch: 0.03,
               }),
@@ -895,9 +895,9 @@ void main() {
                 y: i,
                 z: a + 1,
                 ...u(0.05, 6),
-                vz: $(12, 25),
+                vz: rand(12, 25),
                 drag: 1.2,
-                life: $(0.6, 1),
+                life: rand(0.6, 1),
                 s0: 2,
                 s1: 7,
                 ramp: Q.ash,
@@ -936,14 +936,14 @@ void main() {
             ),
             this.every(t.acc, `frost`, 70, () =>
               this.emit({
-                x: r + $(-1.5, 1.5),
-                y: i + $(-1.5, 1.5),
-                z: a + $(-1.5, 1.5),
+                x: r + rand(-1.5, 1.5),
+                y: i + rand(-1.5, 1.5),
+                z: a + rand(-1.5, 1.5),
                 ...u(0.05, 15),
-                vz: $(-8, 8),
+                vz: rand(-8, 8),
                 drag: 2,
-                life: $(0.25, 0.45),
-                s0: $(0.8, 1.3),
+                life: rand(0.25, 0.45),
+                s0: rand(0.8, 1.3),
                 s1: 0.3,
                 ramp: Q.rime,
                 h0: 4,
@@ -957,9 +957,9 @@ void main() {
                 y: i,
                 z: a,
                 ...u(0.04, 6),
-                vz: $(-3, 4),
+                vz: rand(-3, 4),
                 drag: 1.5,
-                life: $(0.5, 0.8),
+                life: rand(0.5, 0.8),
                 s0: 1.5,
                 s1: 6,
                 ramp: Q.rime,
@@ -972,9 +972,9 @@ void main() {
             ),
             this.every(t.acc, `glint`, 14, () =>
               this.emit({
-                x: r + $(-3, 3),
-                y: i + $(-3, 3),
-                z: a + $(-2, 2),
+                x: r + rand(-3, 3),
+                y: i + rand(-3, 3),
+                z: a + rand(-2, 2),
                 life: 0.25,
                 s0: 2.2,
                 s1: 0.5,
@@ -987,13 +987,13 @@ void main() {
             ));
           break;
         case `storm`: {
-          (n.orbs.set(t.orb, r, i, a, 2.2, s, c, 0, 1.8, $(1.6, 2.4)),
-            (t.light.I = $(0.7, 1.3)));
+          (n.orbs.set(t.orb, r, i, a, 2.2, s, c, 0, 1.8, rand(1.6, 2.4)),
+            (t.light.I = rand(0.7, 1.3)));
           let e = n.ribbons,
             o = md(Math.floor(Math.random() * 1e6));
           for (let t = 0; t < 2; t++) {
             let t = Math.random() * Dd,
-              n = $(4, 8);
+              n = rand(4, 8);
             e.strip(
               vd(
                 [r, i, a],
@@ -1008,7 +1008,7 @@ void main() {
               ),
               0.9,
               Q.storm,
-              $(1.2, 2),
+              rand(1.2, 2),
               1,
               0.4,
             );
@@ -1019,9 +1019,9 @@ void main() {
               y: i,
               z: a,
               ...u(0.25, 40),
-              vz: $(-30, 30),
+              vz: rand(-30, 30),
               drag: 4,
-              life: $(0.12, 0.25),
+              life: rand(0.12, 0.25),
               s0: 0.6,
               ramp: Q.storm,
               h0: 4,
@@ -1033,8 +1033,8 @@ void main() {
           ),
             this.every(t.acc, `glow`, 60, () =>
               this.emit({
-                x: r + $(-1, 1),
-                y: i + $(-1, 1),
+                x: r + rand(-1, 1),
+                y: i + rand(-1, 1),
                 z: a,
                 life: 0.2,
                 s0: 1.5,
@@ -1059,10 +1059,10 @@ void main() {
                 x: r + n,
                 y: i + o,
                 z: a + l,
-                vx: $(-4, 4),
-                vy: $(-4, 4),
-                vz: $(-2, 4),
-                life: $(0.35, 0.5),
+                vx: rand(-4, 4),
+                vy: rand(-4, 4),
+                vz: rand(-2, 4),
+                life: rand(0.35, 0.5),
                 s0: 1.2,
                 s1: 0.4,
                 ramp: Q.void,
@@ -1077,9 +1077,9 @@ void main() {
                 y: i,
                 z: a,
                 ...u(0.1, 8),
-                vz: $(-4, 6),
+                vz: rand(-4, 6),
                 drag: 1.5,
-                life: $(0.5, 0.8),
+                life: rand(0.5, 0.8),
                 s0: 2.5,
                 s1: 7,
                 ramp: Q.void,
@@ -1210,17 +1210,17 @@ void main() {
       ].forEach(([i, a, s], c) => {
         for (let l = 0; l < a; l++) {
           let u = ((l + Math.random() * 0.6) / a) * Dd + c * 0.4,
-            d = n * i * $(0.92, 1.06),
-            f = $(0.25, 0.5);
+            d = n * i * rand(0.92, 1.06),
+            f = rand(0.25, 0.5);
           this.spikes.push({
             idx: -1,
             x: e + Math.cos(u) * d,
             y: t + Math.sin(u) * d * r.fx,
             dir: new W(Math.cos(u) * f, Math.sin(u) * f * r.fx, 1).normalize(),
             roll: Math.random() * Dd,
-            H: $(10, 15) * (0.85 + c * 0.15),
-            w: $(5, 7),
-            t0: this.now + s + $(0, 0.03),
+            H: rand(10, 15) * (0.85 + c * 0.15),
+            w: rand(5, 7),
+            t0: this.now + s + rand(0, 0.03),
             life: 0.5 + c * 0.06,
             ramp: o,
           });
@@ -1342,7 +1342,7 @@ void main() {
             this.spikes.splice(n, 1));
           continue;
         }
-        let a = 1 - (1 - kd(i / 0.08)) ** 3;
+        let a = 1 - (1 - clamp01(i / 0.08)) ** 3;
         (Nd.setFromUnitVectors(Id, r.dir).multiply(
           Pd.setFromAxisAngle(Id, r.roll),
         ),
@@ -1393,7 +1393,7 @@ void main() {
     }
     fall(e, t) {
       let n = this.L,
-        r = kd(e.t / e.dur),
+        r = clamp01(e.t / e.dur),
         i = r * r,
         a = e.x + (e.tx - e.x) * i,
         o = e.y + (e.ty - e.y) * i,
@@ -1421,19 +1421,19 @@ void main() {
         (t.light.I = 1.2 + 2.2 * i),
         (t.light.rad = 40 + 34 * i));
       let h = (e, t) => ({
-        vx: -d * m * e + $(-t, t),
-        vy: $(-t, t) * 0.5,
-        vz: -f * m * e + $(-t, t),
+        vx: -d * m * e + rand(-t, t),
+        vy: rand(-t, t) * 0.5,
+        vz: -f * m * e + rand(-t, t),
       });
       (this.every(t.acc, `fire`, 200, () =>
         this.emit({
-          x: a - d * 8 + $(-4, 4),
+          x: a - d * 8 + rand(-4, 4),
           y: s,
-          z: c - f * 8 + $(-4, 4),
+          z: c - f * 8 + rand(-4, 4),
           ...h(0.12, 20),
           drag: 2.5,
-          life: $(0.3, 0.6),
-          s0: $(4.5, 7),
+          life: rand(0.3, 0.6),
+          s0: rand(4.5, 7),
           s1: 1.5,
           ramp: Q.ember,
           h0: 3.3,
@@ -1449,7 +1449,7 @@ void main() {
             z: c,
             ...h(0.04, 8),
             drag: 1.2,
-            life: $(0.9, 1.5),
+            life: rand(0.9, 1.5),
             s0: 4,
             s1: 13,
             ramp: Q.ash,
@@ -1468,12 +1468,12 @@ void main() {
             ...h(0.1, 40),
             grav: 150,
             drag: 0.6,
-            life: $(0.5, 0.9),
-            s0: $(0.5, 0.9),
+            life: rand(0.5, 0.9),
+            s0: rand(0.5, 0.9),
             ramp: Q.ember,
             h0: 4,
             h1: 2.5,
-            I: $(2, 4),
+            I: rand(2, 4),
             shape: Z.spark,
             stretch: 0.03,
           }),
@@ -1547,16 +1547,16 @@ void main() {
       let c = a.n(10);
       for (let n = 0; n < c; n++) {
         let n = Math.random() * Dd,
-          i = $(50, 140);
+          i = rand(50, 140);
         o.chunks.rock.spawn(
           e,
           t,
           4,
           Math.cos(n) * i,
           Math.sin(n) * i * r.fx,
-          $(90, 200),
-          $(1.6, 3),
-          $(1.6, 2.4),
+          rand(90, 200),
+          rand(1.6, 3),
+          rand(1.6, 2.4),
           s,
           1.4,
           2,
@@ -1593,12 +1593,12 @@ void main() {
           x: e + Math.cos(a) * o,
           y: t + Math.sin(a) * o * r.fx,
           z: 1,
-          vx: $(-4, 4),
-          vy: $(-3, 3),
-          vz: $(20, 45),
+          vx: rand(-4, 4),
+          vy: rand(-3, 3),
+          vz: rand(20, 45),
           drag: 1,
-          life: $(0.3, 0.6),
-          s0: $(2, 3) * (0.5 + c * 0.5),
+          life: rand(0.3, 0.6),
+          s0: rand(2, 3) * (0.5 + c * 0.5),
           s1: 0.5,
           ramp: s,
           h0: 3.3,
@@ -1606,18 +1606,18 @@ void main() {
           I: 1.2,
           add: Od,
         }),
-          (l.I = 1.4 * c * $(0.8, 1.1)));
+          (l.I = 1.4 * c * rand(0.8, 1.1)));
       }),
         this.emitter(1.6, 6, () =>
           this.emit({
-            x: e + $(-n * 0.4, n * 0.4),
-            y: t + $(-n * 0.3, n * 0.3),
+            x: e + rand(-n * 0.4, n * 0.4),
+            y: t + rand(-n * 0.3, n * 0.3),
             z: 2,
-            vx: $(-3, 3),
-            vy: $(-3, 3),
-            vz: $(15, 30),
+            vx: rand(-3, 3),
+            vy: rand(-3, 3),
+            vz: rand(15, 30),
             drag: 0.8,
-            life: $(1, 1.6),
+            life: rand(1, 1.6),
             s0: 4,
             s1: 12,
             ramp: Q.ash,
@@ -1661,9 +1661,9 @@ void main() {
         }),
         this.emitter(i, 18, () =>
           this.emit({
-            x: e + $(-n, n),
+            x: e + rand(-n, n),
             y: t,
-            z: 140 + $(-8, 8),
+            z: 140 + rand(-8, 8),
             life: 0.09,
             s0: 14,
             s1: 18,
@@ -1674,8 +1674,8 @@ void main() {
           }),
         ),
         this.emitter(i, 4, () => {
-          let r = [e + $(-n, n), t, 140 + $(-6, 6)];
-          this.bolt(r, [r[0] + $(-20, 20), t, 140 + $(-8, 8)], {
+          let r = [e + rand(-n, n), t, 140 + rand(-6, 6)];
+          this.bolt(r, [r[0] + rand(-20, 20), t, 140 + rand(-8, 8)], {
             life: 0.08,
             w: 0.8,
             I: 1.6,
@@ -1688,12 +1688,12 @@ void main() {
         this.emitter(i, 14, () => {
           let i = Math.random() * Dd,
             a = [e + Math.cos(i) * n, t + Math.sin(i) * n * r.fx, 0.5],
-            s = i + $(-0.35, 0.35);
+            s = i + rand(-0.35, 0.35);
           this.bolt(
             a,
             [
-              e + Math.cos(s) * n * $(0.7, 1),
-              t + Math.sin(s) * n * r.fx * $(0.7, 1),
+              e + Math.cos(s) * n * rand(0.7, 1),
+              t + Math.sin(s) * n * r.fx * rand(0.7, 1),
               0.5,
             ],
             {
@@ -1711,7 +1711,7 @@ void main() {
     }
     thunder(e, t, n, i, a = Q.storm) {
       let o = this.kit,
-        s = [e + $(-25, 25), t, 260];
+        s = [e + rand(-25, 25), t, 260];
       (this.bolt(s, [e, t, 0], {
         life: 0.38,
         w: 2.6,
@@ -1731,7 +1731,7 @@ void main() {
                   ? 0.2
                   : e < 0.26
                     ? 0.9
-                    : 0.9 * (1 - Ad(0.26, 0.38, e)),
+                    : 0.9 * (1 - smoothstep(0.26, 0.38, e)),
         light: 2.5,
         ramp: a,
       }),
@@ -1770,8 +1770,8 @@ void main() {
           fadeOut: 0.3,
         }));
       for (let i = 0; i < 9; i++) {
-        let o = (i / 9) * Dd + $(-0.3, 0.3),
-          s = n * $(0.6, 1.2);
+        let o = (i / 9) * Dd + rand(-0.3, 0.3),
+          s = n * rand(0.6, 1.2);
         this.bolt(
           [e, t, 0.5],
           [e + Math.cos(o) * s, t + Math.sin(o) * s * r.fx, 0.5],
@@ -1782,7 +1782,7 @@ void main() {
             rough: 0.2,
             depth: 4,
             branches: 1,
-            delay: $(0, 0.08),
+            delay: rand(0, 0.08),
             ramp: a,
           },
         );
@@ -1853,7 +1853,7 @@ void main() {
         fadeOut: 0.22,
         strands: [
           {
-            bow: $(-9, -4),
+            bow: rand(-9, -4),
             amp: 3,
             waves: 1.5,
             speed: 14,
@@ -1863,7 +1863,7 @@ void main() {
             core: 0.45,
           },
           {
-            bow: $(4, 9),
+            bow: rand(4, 9),
             amp: 2.5,
             waves: 2,
             speed: 18,
@@ -1873,7 +1873,7 @@ void main() {
             core: 0.35,
           },
           {
-            bow: $(-2, 2),
+            bow: rand(-2, 2),
             amp: 4,
             waves: 1,
             speed: 11,
@@ -1884,19 +1884,19 @@ void main() {
           },
         ],
       });
-      let a = $(0.32, 0.4);
+      let a = rand(0.32, 0.4);
       (this.emitter(0.42, 55, () => {
-        let n = $(0.3, 0.42),
+        let n = rand(0.3, 0.42),
           r = Math.random() < 0.45;
         this.emit({
-          x: e[0] + $(-3, 3),
-          y: e[1] + $(-2, 2),
-          z: e[2] + $(-3, 3),
+          x: e[0] + rand(-3, 3),
+          y: e[1] + rand(-2, 2),
+          z: e[2] + rand(-3, 3),
           vx: (t[0] - e[0]) / n,
           vy: (t[1] - e[1]) / n,
-          vz: (t[2] - e[2]) / n + $(-8, 8),
+          vz: (t[2] - e[2]) / n + rand(-8, 8),
           life: n,
-          s0: $(1.6, 2.2),
+          s0: rand(1.6, 2.2),
           s1: 1,
           ramp: r ? Q.blood : i,
           h0: 4,
@@ -1956,13 +1956,13 @@ void main() {
     openRift(e, t) {
       let n = this.L,
         r = this.kit,
-        i = e.x * wd,
-        a = e.y * wd,
-        o = (e.spell.radius ?? 2) * wd,
+        i = e.x * PIXELS_PER_UNIT,
+        a = e.y * PIXELS_PER_UNIT,
+        o = (e.spell.radius ?? 2) * PIXELS_PER_UNIT,
         s = Math.max(0.3, e.end - t),
         c = {
           R: o,
-          light: r.light(i, a, 12, Rd(e.school), 1.6, o * 1.2, s, !0),
+          light: r.light(i, a, 12, elementColor(e.school), 1.6, o * 1.2, s, !0),
           orb: -1,
           vtx: null,
           ticks: e.ticks,
@@ -2019,7 +2019,7 @@ void main() {
         c = e.ticks < t.ticks;
       if (((t.ticks = e.ticks), t.school === `cryo`)) {
         let e = Q.rime;
-        ((t.light.I = 0.9 * $(0.85, 1.1)),
+        ((t.light.I = 0.9 * rand(0.85, 1.1)),
           this.every(t.acc, `cloud`, 55, () => {
             let e = Math.random() < 0.5;
             n.orbit(
@@ -2090,9 +2090,9 @@ void main() {
           ),
           this.every(t.acc, `wind`, 25, () =>
             this.emit({
-              x: i + $(-o, o) + 30,
-              y: a + $(-r.fx, r.fx) * o,
-              z: $(5, 60),
+              x: i + rand(-o, o) + 30,
+              y: a + rand(-r.fx, r.fx) * o,
+              z: rand(5, 60),
               vx: -110,
               vy: 15,
               vz: -35,
@@ -2111,10 +2111,10 @@ void main() {
             t < 0 ||
               this.hail.push({
                 idx: t,
-                p: new W(i + $(-0.9, 0.9) * o + 35, a + $(-0.6, 0.6) * o, 85),
-                v: new W($(-60, -45), $(-6, 6), -230),
+                p: new W(i + rand(-0.9, 0.9) * o + 35, a + rand(-0.6, 0.6) * o, 85),
+                v: new W(rand(-60, -45), rand(-6, 6), -230),
                 roll: Math.random() * Dd,
-                spin: $(8, 16),
+                spin: rand(8, 16),
                 ramp: e,
               });
           }),
@@ -2223,8 +2223,8 @@ void main() {
         ),
         this.every(t.acc, `rise`, 10, () =>
           this.emit({
-            x: i + $(-4, 4),
-            y: a + $(-3, 3),
+            x: i + rand(-4, 4),
+            y: a + rand(-3, 3),
             z: 0,
             vz: 30,
             life: 0.4,
@@ -2322,9 +2322,9 @@ void main() {
               x: r.p.x,
               y: r.p.y,
               z: 1,
-              vx: $(-6, 6),
-              vy: $(-4, 4),
-              vz: $(2, 8),
+              vx: rand(-6, 6),
+              vy: rand(-4, 4),
+              vz: rand(2, 8),
               drag: 1.5,
               life: 0.6,
               s0: 2,
@@ -2349,7 +2349,7 @@ void main() {
   },
   Vd = (e, t) => e + Math.random() * (t - e),
   Hd = (e) => (Array.isArray(e) ? Vd(e[0], e[1]) : e),
-  Ud = class {
+  FxKit = class {
     layer;
     density = 1;
     now = 0;

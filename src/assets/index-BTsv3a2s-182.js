@@ -35,7 +35,7 @@ var JW = class {
           x: e,
           y: t,
           vx: Math.cos(n) * o,
-          vy: Math.sin(n) * o * KW.cos,
+          vy: Math.sin(n) * o * RENDER_SCALE.cos,
           color: r[Math.floor(Math.random() * r.length)],
         });
       }
@@ -50,9 +50,9 @@ var JW = class {
           glow: !0,
           ...o,
           x: e + Math.cos(c) * n,
-          y: t + Math.sin(c) * n * KW.cos,
+          y: t + Math.sin(c) * n * RENDER_SCALE.cos,
           vx: Math.cos(c) * a,
-          vy: Math.sin(c) * a * KW.cos,
+          vy: Math.sin(c) * a * RENDER_SCALE.cos,
           color: i[s % i.length],
         });
       }

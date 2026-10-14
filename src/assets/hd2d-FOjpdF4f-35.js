@@ -78,7 +78,7 @@ var Rl = class {
           );
         case `atlas`: {
           let e = this.src,
-            t = new et(),
+            t = new TextureAtlas(),
             n = !1;
           for (let r of e.props)
             (r.frames ? t.wantFrames(r.frames) : t.want(r.c), (n = !0));
@@ -246,7 +246,7 @@ var Rl = class {
       let r = e.kind === `dungeon` ? e.phase : 0;
       ((t.uSpFogOn.value = 1),
         (t.uSpFogTex.value = this.fogTex),
-        (t.uSpFogMask.value = this.maskTex ?? xt()));
+        (t.uSpFogMask.value = this.maskTex ?? getWhiteTexture()));
       let i = this.src.floor;
       (this.maskTex
         ? t.uSpFogRect.value.set(i.x, i.y, n.cols * 16, n.rows * 16)

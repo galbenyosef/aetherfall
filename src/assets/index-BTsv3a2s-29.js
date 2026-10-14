@@ -176,7 +176,7 @@ function pu(e) {
   let t = Il[e];
   return { x: t.x + 0.5, y: t.y + 0.6 };
 }
-var mu = class extends Error {
+var GateError = class extends Error {
     status;
     retryAfter;
     constructor(e, t, n) {
@@ -186,8 +186,8 @@ var mu = class extends Error {
         (this.retryAfter = n));
     }
   },
-  hu = (e) => new Promise((t) => setTimeout(t, e)),
-  gu = class {
+  delay = (e) => new Promise((t) => setTimeout(t, e)),
+  GateClient = class {
     base;
     deviceToken;
     session = null;
@@ -210,11 +210,11 @@ var mu = class extends Error {
           body: n === void 0 ? void 0 : JSON.stringify(n),
         });
       } catch {
-        throw new mu(0, `Can't reach the realm's gate. Check your connection.`);
+        throw new GateError(0, `Can't reach the realm's gate. Check your connection.`);
       }
       let a = await i.json().catch(() => ({}));
       if (!i.ok)
-        throw new mu(
+        throw new GateError(
           i.status,
           a.error ?? `The gate answered ${i.status}.`,
           a.retryAfter,
@@ -240,7 +240,7 @@ var mu = class extends Error {
       try {
         return await this.raw(e, t, n, await this.auth());
       } catch (r) {
-        if (r instanceof mu && r.status === 401)
+        if (r instanceof GateError && r.status === 401)
           return await this.raw(e, t, n, await this.auth(!0));
         throw r;
       }
@@ -270,15 +270,15 @@ var mu = class extends Error {
         try {
           return await this.call(`POST`, `/v1/enter`, { characterId: e, ...t });
         } catch (e) {
-          if (e instanceof mu && e.status === 409 && e.retryAfter && n < 6) {
-            await hu(e.retryAfter * 1e3 + Math.random() * 1e3);
+          if (e instanceof GateError && e.status === 409 && e.retryAfter && n < 6) {
+            await delay(e.retryAfter * 1e3 + Math.random() * 1e3);
             continue;
           }
           throw e;
         }
     }
   };
-function _u() {
+function gateBaseUrl() {
   let e =
     typeof location < `u` &&
     /^(localhost|127\.0\.0\.1)$/.test(location.hostname);

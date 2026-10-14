@@ -14,13 +14,13 @@ function Vde({
     c = (0, v.useRef)(null),
     l = (0, v.useRef)(null),
     [u, d] = (0, v.useState)(null),
-    f = (0, v.useMemo)(() => (WW.name === `aws` ? `auto` : hf()), []),
+    f = (0, v.useMemo)(() => (activeBackend.name === `aws` ? `auto` : parseZoneOverride()), []),
     p = (0, v.useRef)(null),
-    m = WW.useOnlinePlayers(),
-    h = WW.useMonsters(!f),
-    g = WW.useRecentFx(!f),
-    _ = WW.useChat(),
-    y = WW.useActions(e),
+    m = activeBackend.useOnlinePlayers(),
+    h = activeBackend.useMonsters(!f),
+    g = activeBackend.useRecentFx(!f),
+    _ = activeBackend.useChat(),
+    y = activeBackend.useActions(e),
     [b, x] = (0, v.useState)(!1),
     [S, C] = (0, v.useState)(void 0),
     [w, T] = (0, v.useState)(0),
@@ -32,8 +32,8 @@ function Vde({
     ae = J8(),
     oe = x5(),
     se = (0, v.useMemo)(() => _ && Zs(_, oe.ignored, t), [_, oe.ignored, t]),
-    ce = WW.useInventory(e),
-    le = WW.useGround(e),
+    ce = activeBackend.useInventory(e),
+    le = activeBackend.useGround(e),
     [ue, de] = (0, v.useState)(!1),
     fe = (0, v.useRef)(ue);
   fe.current = ue;
@@ -50,20 +50,20 @@ function Vde({
       ((Ce.current = e), l.current && (l.current.god = e));
     }, []),
     Te = (0, v.useCallback)((e, t) => l.current?.devJump(e, t), []),
-    Ee = WW.useQuests(e),
+    Ee = activeBackend.useQuests(e),
     [De, Oe] = (0, v.useState)(!1),
     [ke, Ae] = (0, v.useState)(!1),
-    je = WW.useAltars(),
+    je = activeBackend.useAltars(),
     [Me, Ne] = (0, v.useState)(null),
     [Pe, Fe] = (0, v.useState)(!1),
     [Ie, Le] = (0, v.useState)(null),
-    Re = WW.useDelves(e),
+    Re = activeBackend.useDelves(e),
     [ze, Be] = (0, v.useState)(null),
     [Ve, He] = (0, v.useState)(null),
     [Ue, We] = (0, v.useState)(null),
-    Ge = WW.useRemains?.(),
-    Ke = WW.useWanted?.(),
-    qe = WW.useWrit?.(),
+    Ge = activeBackend.useRemains?.(),
+    Ke = activeBackend.useWanted?.(),
+    qe = activeBackend.useWrit?.(),
     [Je, Ye] = (0, v.useState)(null),
     [Xe, Ze] = (0, v.useState)(null),
     Qe = (0, v.useCallback)(() => Ze(null), []),
@@ -73,7 +73,7 @@ function Vde({
       return e && t ? { ...e, x: e.x + t.left, y: e.y + t.top } : null;
     }, []),
     [et, tt] = (0, v.useState)(null),
-    nt = WW.useParty?.(),
+    nt = activeBackend.useParty?.(),
     rt = !!nt && !!y.party,
     it = (0, v.useRef)(rt);
   it.current = rt;
@@ -81,7 +81,7 @@ function Vde({
     st = (0, v.useCallback)(() => ot(!1), []),
     [ct, lt] = (0, v.useState)(null),
     ut = (0, v.useRef)(!1),
-    ft = WW.useHome(e),
+    ft = activeBackend.useHome(e),
     pt = ft !== null,
     mt = (0, v.useRef)(ft);
   mt.current = ft;
@@ -104,7 +104,7 @@ function Vde({
     zt = (0, v.useCallback)((e) => xe((t) => t.filter((t) => t.id !== e)), []),
     Bt = (0, v.useCallback)(
       (e) => {
-        let t = WW.userError(e) ?? `Something went wrong.`;
+        let t = activeBackend.userError(e) ?? `Something went wrong.`;
         Rt({ text: t, color: `#ff7a8a` });
       },
       [Rt],
@@ -287,7 +287,7 @@ function Vde({
     toggleHearth: Zt,
     homeUse: qt,
   };
-  let en = (e) => Error(WW.userError(e) ?? `Something went wrong.`);
+  let en = (e) => Error(activeBackend.userError(e) ?? `Something went wrong.`);
   ((0, v.useEffect)(() => {
     let e = 0,
       i = (e, t) =>
@@ -386,7 +386,7 @@ function Vde({
                   q.sfx(`click`, 0.7));
               })
               .catch((e) => {
-                WW.userError(e)?.includes(`full`) &&
+                activeBackend.userError(e)?.includes(`full`) &&
                   Date.now() - Lt.current > 5e3 &&
                   ((Lt.current = Date.now()),
                   $t.current.toast({
@@ -521,15 +521,15 @@ function Vde({
     if (((l.current = a), (a.god = Ce.current), f)) {
       a.net = { glide: 0.12 };
       let e = f === `auto`,
-        n = new Sf(a, {
+        n = new ZoneClient(a, {
           seat: e ? (e) => $t.current.act.enterZone(e) : void 0,
           url: e ? void 0 : f,
-          room: e ? void 0 : gf(),
+          room: e ? void 0 : parseRoomOverride(),
           myId: t,
           onNotice: (e) => $t.current.toast({ text: e, color: `#7ef9ff` }),
-          onPush: (e) => WW.handlePush?.(e),
+          onPush: (e) => activeBackend.handlePush?.(e),
         });
-      ((p.current = n), WW.attachZone?.(n), n.start());
+      ((p.current = n), activeBackend.attachZone?.(n), n.start());
     }
     (a.attachMinimap(c.current),
       a.start(),
@@ -545,7 +545,7 @@ function Vde({
           window.removeEventListener(`beforeunload`, u),
           p.current?.stop(),
           (p.current = null),
-          WW.attachZone?.(null),
+          activeBackend.attachZone?.(null),
           a.dispose(),
           (l.current = null));
       }
@@ -848,7 +848,7 @@ function Vde({
         t === `hearth` &&
           !e.repeat &&
           !e.altKey &&
-          WW.name === `aws` &&
+          activeBackend.name === `aws` &&
           n?.story?.done &&
           !n.story.locked &&
           !n.story.chatting &&
@@ -1042,7 +1042,7 @@ function Vde({
     Nn = wc(nt?.followUntil, performance.now()),
     Pn = (u?.pvp.outlaw ?? 0) > 0,
     Fn = (e) => ({
-      whispers: WW.name === `aws`,
+      whispers: activeBackend.name === `aws`,
       ignored: e,
       parties: rt,
       party: Mn
@@ -1410,7 +1410,7 @@ function Vde({
           journal: !!Cn?.story?.done,
           quests: u.quests.entries.length,
           questWaiting: !!u.quests.next && u.quests.chapter.status === `ready`,
-          hearth: WW.name === `aws`,
+          hearth: activeBackend.name === `aws`,
           bag: ce ? `${ce.bag.length}/${ce.bagMax}` : null,
           homes: pt,
           onMenu: () => te(!0),
@@ -1573,7 +1573,7 @@ function Vde({
             (0, Q.jsx)(qde, {
               hud: u,
               school: r,
-              onHearth: WW.name === `aws` ? fn : void 0,
+              onHearth: activeBackend.name === `aws` ? fn : void 0,
               onLoadout: (e) => y.setLoadout(e),
             }),
           u &&
@@ -1634,7 +1634,7 @@ function Vde({
                 messages: se ?? [],
                 myId: t,
                 myName: n,
-                channels: WW.name === `aws`,
+                channels: activeBackend.name === `aws`,
                 parties: rt,
                 inParty: !!Mn,
                 unfolded: !GG || E,
@@ -1697,7 +1697,7 @@ function Vde({
                     (e) => {
                       (he({ done: e, n }), t(e));
                     },
-                    (e) => WW.userError(e) ?? `Something went wrong.`,
+                    (e) => activeBackend.userError(e) ?? `Something went wrong.`,
                   )
                     .then(
                       (e) => (
@@ -2099,8 +2099,8 @@ function Vde({
                 );
               },
               (e) => {
-                let t = WW.userError(e) ?? `Something went wrong.`,
-                  n = e instanceof vf && e.unanswered;
+                let t = activeBackend.userError(e) ?? `Something went wrong.`,
+                  n = e instanceof ZoneError && e.unanswered;
                 return (
                   Rt({
                     text: n
@@ -2108,7 +2108,7 @@ function Vde({
                       : t,
                     color: `#ff7a8a`,
                   }),
-                  e instanceof vf && e.refused ? t : null
+                  e instanceof ZoneError && e.refused ? t : null
                 );
               },
             ),

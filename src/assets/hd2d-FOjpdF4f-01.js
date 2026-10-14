@@ -1,4 +1,4 @@
-// hd2d-FOjpdF4f 01 — math
+// hd2d-FOjpdF4f 01 — atlas_pad
 // Lines 12-162 of readable/assets/hd2d-FOjpdF4f.pretty.js (statement-aligned).
 import {
   $ as e,
@@ -101,9 +101,9 @@ import {
   y as Ye,
   yt as Xe,
 } from "./fx3d-DiRK8ozf.js";
-var Ze = 2048,
-  Qe = 1;
-function $e(e, t = Ze) {
+var ATLAS_SIZE = 2048,
+  ATLAS_PAD = 1;
+function packAtlas(e, t = ATLAS_SIZE) {
   let n = e
       .map((e, t) => ({ g: e, i: t, h: Math.max(0, ...e.map((e) => e.h)) }))
       .sort((e, t) => t.h - e.h || e.i - t.i),
@@ -122,8 +122,8 @@ function $e(e, t = Ze) {
         i = c,
         l = [];
       for (let o of e) {
-        let e = o.w + Qe,
-          s = o.h + Qe;
+        let e = o.w + ATLAS_PAD,
+          s = o.h + ATLAS_PAD;
         if ((n + e > t && ((r += i), (n = 0), (i = 0)), n + e > t || r + s > t))
           return null;
         (l.push({ page: a, x: n, y: r }), (n += e), (i = Math.max(i, s)));
@@ -132,14 +132,14 @@ function $e(e, t = Ze) {
     };
   for (let { g: e, i: o } of n) {
     if (!e.length) continue;
-    if (e.some((e) => e.w + Qe > t || e.h + Qe > t)) {
-      let t = e.reduce((e, t) => e + t.w + Qe, 0),
-        n = Math.max(...e.map((e) => e.h + Qe));
+    if (e.some((e) => e.w + ATLAS_PAD > t || e.h + ATLAS_PAD > t)) {
+      let t = e.reduce((e, t) => e + t.w + ATLAS_PAD, 0),
+        n = Math.max(...e.map((e) => e.h + ATLAS_PAD));
       i.push({ w: t, h: n });
       let s = 0;
       ((r[o] = e.map((e) => {
         let t = { page: i.length - 1, x: s, y: 0 };
-        return ((s += e.w + Qe), t);
+        return ((s += e.w + ATLAS_PAD), t);
       })),
         (a = -1));
       continue;

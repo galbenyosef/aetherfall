@@ -16,7 +16,7 @@ var Xa = (e, t, n) => {
     torch = null;
     fade = 0;
     skip = { x: 0, y: 0, r: 0 };
-    constructor(e = pt()) {
+    constructor(e = createHd2dUniforms()) {
       this.uniforms = e;
     }
     sky(e, t = 1) {

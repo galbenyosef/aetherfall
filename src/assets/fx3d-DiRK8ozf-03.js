@@ -1,6 +1,6 @@
 // fx3d-DiRK8ozf 03 — math
 // Lines 26706-27243 of readable/assets/fx3d-DiRK8ozf.pretty.js (statement-aligned).
-var Iu = 16,
+var WORLD_SCALE = 16,
   Lu = Math.PI * 2,
   Ru = (e, t) => e + Math.random() * (t - e),
   zu = (e) => Math.max(0, Math.min(1, e)),
@@ -9,7 +9,7 @@ var Iu = 16,
   Hu = new It(),
   Uu = new W(0, 0, 1),
   Wu = { dx: -0.5, dy: -15 },
-  Gu = class {
+  GolemFx = class {
     kit;
     st = new Map();
     shards = new Map();
@@ -91,20 +91,20 @@ var Iu = 16,
         d = zu(t.t / t.windup),
         f = Math.hypot(i.me.x - t.ox, i.me.y - t.oy) < 13,
         p = t.monsterId ? i.body(t.monsterId) : null,
-        m = (p?.x ?? t.ox) * Iu,
-        h = (p?.y ?? t.oy) * Iu,
+        m = (p?.x ?? t.ox) * WORLD_SCALE,
+        h = (p?.y ?? t.oy) * WORLD_SCALE,
         g = t.look?.from ?? Wu,
         _ = g.dx * (t.flip ? -1 : 1),
-        v = t.ox * Iu + _,
-        y = t.oy * Iu + 1,
+        v = t.ox * WORLD_SCALE + _,
+        y = t.oy * WORLD_SCALE + 1,
         b = -g.dy,
-        x = Math.max(0.6, (c.r * 2 * Iu) / 11);
+        x = Math.max(0.6, (c.r * 2 * WORLD_SCALE) / 11);
       switch (c.id) {
         case `crush`: {
           let e = t.geo.shapes[0];
           if (!e || e.t !== `cone`) return;
-          let r = (e.x + (Math.cos(e.a) * 17) / Iu) * Iu,
-            c = (e.y + (Math.sin(e.a) * 17 * 0.8) / Iu) * Iu;
+          let r = (e.x + (Math.cos(e.a) * 17) / WORLD_SCALE) * WORLD_SCALE,
+            c = (e.y + (Math.sin(e.a) * 17 * 0.8) / WORLD_SCALE) * WORLD_SCALE;
           (this.once(n, `fists`, t.t > t.windup * 0.25, () => {
             (a.light(m - 9, h, 46, s, 0.8, 18, t.windup * 0.75, !0),
               a.light(m + 9, h, 46, s, 0.8, 18, t.windup * 0.75, !0));
@@ -228,12 +228,12 @@ var Iu = 16,
               this.every(n, `survey`, 9, () => {
                 for (let e of r) {
                   let t = qu(e),
-                    n = Math.hypot(t.x - Ku(e).x, t.y - Ku(e).y) * Iu,
+                    n = Math.hypot(t.x - Ku(e).x, t.y - Ku(e).y) * WORLD_SCALE,
                     r = Math.atan2(t.y - Ku(e).y, t.x - Ku(e).x);
                   a.layer.particles.emit(
                     {
-                      x: Ku(e).x * Iu,
-                      y: Ku(e).y * Iu,
+                      x: Ku(e).x * WORLD_SCALE,
+                      y: Ku(e).y * WORLD_SCALE,
                       z: 0.5,
                       vx: Math.cos(r) * 170,
                       vy: Math.sin(r) * 170,
@@ -257,7 +257,7 @@ var Iu = 16,
               (a.flare(v, y + 3, b, 18, 0.3, s, 3),
                 a.ring(v, y + 3, b, 6, 70, 0.35, s, 1.5),
                 a.light(v, y, b, s, 2.2, 70, 0.35),
-                a.shock(t.ox * Iu, t.oy * Iu, 46, 2.4, 0.35),
+                a.shock(t.ox * WORLD_SCALE, t.oy * WORLD_SCALE, 46, 2.4, 0.35),
                 f && (a.ca(1.2), i.shake(3)));
               for (let e of r) {
                 let n = Ku(e),
@@ -268,7 +268,7 @@ var Iu = 16,
                   sy: y,
                   sz: b,
                   ang: Math.atan2(r.y - n.y, r.x - n.x),
-                  len: Math.hypot(r.x - n.x, r.y - n.y) * Iu,
+                  len: Math.hypot(r.x - n.x, r.y - n.y) * WORLD_SCALE,
                   ez: 0,
                   sweep: t.geo.turn ?? 0,
                   life: u,
@@ -292,8 +292,8 @@ var Iu = 16,
             for (let n of r) {
               let r = e(n, t.geo.turn ?? 0, i),
                 c = qu(r),
-                l = c.x * Iu,
-                u = c.y * Iu,
+                l = c.x * WORLD_SCALE,
+                u = c.y * WORLD_SCALE,
                 d = Math.atan2(c.y - Ku(r).y, c.x - Ku(r).x);
               (a.sparks(l, u, 1, 1.2, s, d + Math.PI, 1.2, [40, 140]),
                 a.spray(l, u, 1, 0.5, {
@@ -355,8 +355,8 @@ var Iu = 16,
               !n.fired.has(`prisms`) &&
               this.once(n, `prisms`, !0, () => {
                 n.prisms = r.map((t) => ({
-                  x: t.x * Iu,
-                  y: t.y * Iu,
+                  x: t.x * WORLD_SCALE,
+                  y: t.y * WORLD_SCALE,
                   idx: e.pools.prism.alloc(s, 0.5),
                   light: null,
                   landed: !1,
@@ -412,10 +412,10 @@ var Iu = 16,
               for (let e of t.geo.beams ?? []) {
                 if (e.t !== `line`) continue;
                 let n = Math.hypot(e.x0 - t.ox, e.y0 - t.oy) < 0.05,
-                  r = n ? v : e.x0 * Iu,
-                  i = n ? y : e.y0 * Iu,
-                  c = e.x1 * Iu,
-                  l = e.y1 * Iu;
+                  r = n ? v : e.x0 * WORLD_SCALE,
+                  i = n ? y : e.y0 * WORLD_SCALE,
+                  c = e.x1 * WORLD_SCALE,
+                  l = e.y1 * WORLD_SCALE;
                 a.beam({
                   sx: r,
                   sy: i,
@@ -450,8 +450,8 @@ var Iu = 16,
               if (e.t !== `line`) continue;
               let t = Math.random();
               a.spray(
-                e.x0 * Iu + (e.x1 - e.x0) * Iu * t,
-                e.y0 * Iu + (e.y1 - e.y0) * Iu * t,
+                e.x0 * WORLD_SCALE + (e.x1 - e.x0) * WORLD_SCALE * t,
+                e.y0 * WORLD_SCALE + (e.y1 - e.y0) * WORLD_SCALE * t,
                 8,
                 0.7,
                 {
@@ -489,8 +489,8 @@ var Iu = 16,
         if (!a || r.a.id !== `shardquake` || !i(a, r.a.id)) continue;
         let o = `${r.id}:${r.n}`,
           s = a === `hollowwarden` ? Q.hollow : Q.aether,
-          c = r.x * Iu,
-          l = r.y * Iu + 7,
+          c = r.x * WORLD_SCALE,
+          l = r.y * WORLD_SCALE + 7,
           u = this.shards.get(o);
         (u ||
           ((u = {

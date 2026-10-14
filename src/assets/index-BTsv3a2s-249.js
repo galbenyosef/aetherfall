@@ -99,7 +99,7 @@ function tle({
                 className: `gm-controls`,
                 children: [
                   u
-                    ? (0, Q.jsx)(Z8, { aws: WW.name === `aws`, homes: e })
+                    ? (0, Q.jsx)(Z8, { aws: activeBackend.name === `aws`, homes: e })
                     : (0, Q.jsx)(o5, { touch: GG, muted: l }),
                   (0, Q.jsx)(`small`, {
                     children: `Inside the Lumen Ward is safe ground, and it heals you quickly. Outside it, other mages can fight you, and a mage they slay drops everything. Walk into a shop's door to go inside. A ! means someone has a quest for you, a ? that they're waiting to hear back: on a gold diamond for the story, a blue disc for a side quest.`,

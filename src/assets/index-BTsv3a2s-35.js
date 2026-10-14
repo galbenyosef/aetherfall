@@ -1,6 +1,6 @@
 // index-BTsv3a2s 35 — kind
 // Lines 27909-28868 of readable/assets/index-BTsv3a2s.pretty.js (statement-aligned).
-var Sf = class {
+var ZoneClient = class {
   game;
   opts;
   base;
@@ -40,7 +40,7 @@ var Sf = class {
   constructor(e, t) {
     ((this.game = e),
       (this.opts = t),
-      (this.base = t.url ? _f(t.url) : ``),
+      (this.base = t.url ? normalizeZoneUrl(t.url) : ``),
       (this.room = t.room ?? (t.seat ? `` : `marizon-1`)),
       e.setFx([]));
   }
@@ -117,10 +117,10 @@ var Sf = class {
         let n = e;
         if (!n && this.opts.seat) {
           let e = await this.opts.seat(this.avoid);
-          ((this.base = _f(e.url)), (this.room = e.room), (n = e.ticket));
+          ((this.base = normalizeZoneUrl(e.url)), (this.room = e.room), (n = e.ticket));
         }
         if (
-          ((n ??= await (this.opts.ticket ?? xf(this.base))(this.room, t)),
+          ((n ??= await (this.opts.ticket ?? fetchDevTicket(this.base))(this.room, t)),
           this.stopped)
         )
           return;
@@ -145,7 +145,7 @@ var Sf = class {
               }, 1e3));
           }));
       } catch (e) {
-        ((this.note = bf(e)), (this.state = `offline`), this.scheduleRetry());
+        ((this.note = describeTransportError(e)), (this.state = `offline`), this.scheduleRetry());
       }
     }
   }
@@ -176,14 +176,14 @@ var Sf = class {
     let n = this.ws;
     if (!n || n.readyState !== 1 || this.state !== `online`)
       return Promise.reject(
-        new vf(`Not connected to the realm right now. Try again in a moment.`),
+        new ZoneError(`Not connected to the realm right now. Try again in a moment.`),
       );
     let r = ++this.reqSeq;
     return new Promise((i, a) => {
       let o = setTimeout(() => {
         (this.requests.delete(r),
-          a(new vf(`The realm server didn't answer.`, !1, !0)));
-      }, yf);
+          a(new ZoneError(`The realm server didn't answer.`, !1, !0)));
+      }, ZONE_REQUEST_TIMEOUT);
       (this.requests.set(r, { resolve: i, reject: a, timer: o }),
         n.send(JSON.stringify({ ...t, id: r, op: e })));
     });
@@ -205,11 +205,11 @@ var Sf = class {
       clearTimeout(n.timer),
       t.ok
         ? n.resolve(t.result ?? null)
-        : n.reject(new vf(t.error ?? `The realm server refused.`, !0)));
+        : n.reject(new ZoneError(t.error ?? `The realm server refused.`, !0)));
   }
   failRequests(e) {
     for (let t of this.requests.values())
-      (clearTimeout(t.timer), t.reject(new vf(e, !1, !0)));
+      (clearTimeout(t.timer), t.reject(new ZoneError(e, !1, !0)));
     this.requests.clear();
   }
   resetWorld() {
@@ -307,7 +307,7 @@ var Sf = class {
             this.clearTimers(),
             this.resetWorld(),
             t.target && (this.room = t.target),
-            t.url && (this.base = _f(t.url)),
+            t.url && (this.base = normalizeZoneUrl(t.url)),
             (this.state = `offline`),
             setTimeout(() => void this.connect(t.ticket || void 0), 300));
           break;

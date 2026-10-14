@@ -54,23 +54,23 @@ vec3 hdFog(vec3 lit, vec3 emissive, vec3 P) {
 #endif
 }
 `,
-  gt = `HD_SPACE`;
-function _t(e, t) {
+  HD_SPACE = `HD_SPACE`;
+function setHdSpace(e, t) {
   if ((!!e.defines && `HD_SPACE` in e.defines) === t) return !1;
   let n = { ...(e.defines ?? {}) };
   return (
-    t ? (n[gt] = 1) : delete n[gt],
+    t ? (n[HD_SPACE] = 1) : delete n[HD_SPACE],
     (e.defines = n),
     (e.needsUpdate = !0),
     !0
   );
 }
-function vt(e) {
+function isHdFogMaterial(e) {
   return e.isRawShaderMaterial === !0 && e.fragmentShader.includes(`hdFog(`);
 }
-var yt = [10 / 255, 6 / 255, 34 / 255],
+var NIGHT_FOG = [10 / 255, 6 / 255, 34 / 255],
   bt = null;
-function xt() {
+function getWhiteTexture() {
   return (
     bt ||
       ((bt = new Oe(new Uint8Array([255, 255, 255, 255]), 1, 1, Ue, Se)),
@@ -79,18 +79,18 @@ function xt() {
     bt
   );
 }
-function St() {
+function createSpaceFogUniforms() {
   return {
     uLift: { value: new z(0, 0, 0) },
     uSpFogOn: { value: 0 },
-    uSpFogTex: { value: xt() },
-    uSpFogMask: { value: xt() },
+    uSpFogTex: { value: getWhiteTexture() },
+    uSpFogMask: { value: getWhiteTexture() },
     uSpFogRect: { value: new j(0, 0, 1, 1) },
     uSpFogOff: { value: new P(0, 0) },
     uSpFogA: { value: 0 },
   };
 }
-var Ct = `
+var SHARPEN_GLSL = `
 vec4 hdSharp(sampler2D t, vec2 uv, vec2 size) {
   vec2 p = uv * size;
   vec2 seam = floor(p + 0.5);
@@ -105,21 +105,21 @@ float hdBayer4(vec2 fc) {
   return (m[i] + 0.5) / 16.0;
 }
 `,
-  wt = `
+  WARP_GLSL = `
 vec2 hdSharpW(vec2 p) {
   vec2 seam = floor(p + 0.5);
   return clamp((p - seam) / max(fwidth(p), vec2(1e-4)), -0.5, 0.5) + 0.5;
 }
 `,
-  K = { foot: `aFoot`, rect: `aRect`, box: `aBox` },
-  Tt = [0, 0, 1, 0, 0, 1, 1, 1, 0, 2, 1, 2, 0, 3, 1, 3],
-  Et = [0, 2, 1, 1, 2, 3, 4, 6, 5, 5, 6, 7];
-function Dt() {
+  ATTRIB = { foot: `aFoot`, rect: `aRect`, box: `aBox` },
+  QUAD_VERTS = [0, 0, 1, 0, 0, 1, 1, 1, 0, 2, 1, 2, 0, 3, 1, 3],
+  QUAD_INDICES = [0, 2, 1, 1, 2, 3, 4, 6, 5, 5, 6, 7];
+function createQuadGeometry() {
   let e = new L(),
     t = new Float32Array(24);
   for (let e = 0; e < 8; e++)
-    ((t[e * 3] = Tt[e * 2]), (t[e * 3 + 1] = Tt[e * 2 + 1]));
-  return (e.setAttribute(`position`, new U(t, 3)), e.setIndex([...Et]), e);
+    ((t[e * 3] = QUAD_VERTS[e * 2]), (t[e * 3 + 1] = QUAD_VERTS[e * 2 + 1]));
+  return (e.setAttribute(`position`, new U(t, 3)), e.setIndex([...QUAD_INDICES]), e);
 }
 function Ot() {
   return {

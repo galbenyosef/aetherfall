@@ -93,7 +93,7 @@ ${lt}
 ${ut}
 ${e}
 ${br}
-${wt}
+${WARP_GLSL}
 ${Sr}
 void main() {
   vec4 c = obliqueTexel(vP);
@@ -113,7 +113,7 @@ flat in vec3 vG;
 flat in vec2 vOcc;
 flat in float vDens;
 out vec4 o;
-${wt}
+${WARP_GLSL}
 ${Sr}
 void main() {
   if (obliqueTexel(vP).a < 0.5) discard;

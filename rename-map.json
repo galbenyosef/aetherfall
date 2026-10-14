@@ -1,0 +1,554 @@
+{
+  "note": "Semantic rename map for src/, recovered mechanically by anchor alignment from the committed slices (tools/recover-scoped-map.mjs): the token streams of a slice and its readable range must be identical in every non-identifier position, so every differing identifier pair is a proven rename, not a guess. `files` is a word-boundary map, used only where a name means the same thing everywhere in the slice and is never a property or object key; `scoped` addresses the rest by exact token index as { name: [[i, target], …] }. tools/derive.mjs re-applies this map when it re-cuts src/ (index-validated), tools/verify-rename.mjs and tools/audit.js re-prove every slice from it, and tools/check-chunk.mjs proves cross-slice references still resolve. Regenerate with `node tools/recover-scoped-map.mjs` after any rename batch.",
+  "files": {
+    "assets/fx3d-DiRK8ozf-02.js": {
+      "Fu": "buildPaletteTexture",
+      "Nu": "parseHexColor",
+      "Pu": "paletteColor"
+    },
+    "assets/fx3d-DiRK8ozf-03.js": {
+      "Gu": "GolemFx",
+      "Iu": "WORLD_SCALE"
+    },
+    "assets/fx3d-DiRK8ozf-06.js": {
+      "$": "rand",
+      "Ad": "smoothstep",
+      "Bd": "MageFx",
+      "Ld": "ELEMENT_COLORS",
+      "Rd": "elementColor",
+      "Ud": "FxKit",
+      "kd": "clamp01",
+      "wd": "PIXELS_PER_UNIT",
+      "zd": "toLayerPoint"
+    },
+    "assets/fx3d-DiRK8ozf-08.js": {
+      "bf": "SHADER_HEADER",
+      "gf": "QUALITY_TIERS",
+      "vf": "MAX_POINT_LIGHTS",
+      "yf": "MAX_LINE_LIGHTS"
+    },
+    "assets/fx3d-DiRK8ozf-10.js": {
+      "Af": "lightFalloff",
+      "Fu": "buildPaletteTexture",
+      "Pu": "paletteColor",
+      "bf": "SHADER_HEADER",
+      "gf": "QUALITY_TIERS",
+      "kf": "Fx3dLayer",
+      "vf": "MAX_POINT_LIGHTS",
+      "yf": "MAX_LINE_LIGHTS"
+    },
+    "assets/fx3d-DiRK8ozf-11.js": {
+      "Af": "lightFalloff",
+      "Bd": "MageFx",
+      "Gu": "GolemFx",
+      "Ud": "FxKit",
+      "jf": "createFx3D",
+      "kf": "Fx3dLayer"
+    },
+    "assets/hd2d-FOjpdF4f-01.js": {
+      "$e": "packAtlas",
+      "Qe": "ATLAS_PAD",
+      "Ze": "ATLAS_SIZE"
+    },
+    "assets/hd2d-FOjpdF4f-02.js": {
+      "$e": "packAtlas",
+      "et": "TextureAtlas",
+      "ft": "getShadowDepthTexture",
+      "pt": "createHd2dUniforms"
+    },
+    "assets/hd2d-FOjpdF4f-03.js": {
+      "Ct": "SHARPEN_GLSL",
+      "Dt": "createQuadGeometry",
+      "K": "ATTRIB",
+      "St": "createSpaceFogUniforms",
+      "Tt": "QUAD_VERTS",
+      "_t": "setHdSpace",
+      "gt": "HD_SPACE",
+      "vt": "isHdFogMaterial",
+      "wt": "WARP_GLSL",
+      "xt": "getWhiteTexture",
+      "yt": "NIGHT_FOG"
+    },
+    "assets/hd2d-FOjpdF4f-04.js": {
+      "wt": "WARP_GLSL"
+    },
+    "assets/hd2d-FOjpdF4f-06.js": {
+      "wt": "WARP_GLSL"
+    },
+    "assets/hd2d-FOjpdF4f-07.js": {
+      "Ct": "SHARPEN_GLSL"
+    },
+    "assets/hd2d-FOjpdF4f-09.js": {
+      "Dt": "createQuadGeometry",
+      "K": "ATTRIB"
+    },
+    "assets/hd2d-FOjpdF4f-10.js": {
+      "Dt": "createQuadGeometry",
+      "K": "ATTRIB"
+    },
+    "assets/hd2d-FOjpdF4f-13.js": {
+      "et": "TextureAtlas"
+    },
+    "assets/hd2d-FOjpdF4f-19.js": {
+      "pt": "createHd2dUniforms"
+    },
+    "assets/hd2d-FOjpdF4f-23.js": {
+      "ft": "getShadowDepthTexture"
+    },
+    "assets/hd2d-FOjpdF4f-24.js": {
+      "ft": "getShadowDepthTexture"
+    },
+    "assets/hd2d-FOjpdF4f-25.js": {
+      "_t": "setHdSpace"
+    },
+    "assets/hd2d-FOjpdF4f-34.js": {
+      "_t": "setHdSpace",
+      "vt": "isHdFogMaterial"
+    },
+    "assets/hd2d-FOjpdF4f-35.js": {
+      "et": "TextureAtlas",
+      "xt": "getWhiteTexture"
+    },
+    "assets/hd2d-FOjpdF4f-37.js": {
+      "St": "createSpaceFogUniforms",
+      "_t": "setHdSpace",
+      "cu": "Hd2dRenderer",
+      "gt": "HD_SPACE",
+      "lu": "rendererConfig",
+      "pt": "createHd2dUniforms",
+      "uu": "defaultToggles",
+      "vt": "isHdFogMaterial",
+      "xt": "getWhiteTexture",
+      "yt": "NIGHT_FOG"
+    },
+    "assets/hd2d-FOjpdF4f-38.js": {
+      "cu": "Hd2dRenderer",
+      "fu": "createHd2d"
+    },
+    "assets/index-BTsv3a2s-176.js": {
+      "$H": "sessionListeners",
+      "GH": "GATE_BASE_URL",
+      "JH": "EMPTY_HOME",
+      "KH": "activeZone",
+      "Ml": "setLastMageId",
+      "YH": "noteSeq",
+      "ZH": "MAX_CHARACTERS",
+      "_U": "noopAsync",
+      "_u": "gateBaseUrl",
+      "aU": "normalizeHeroKind",
+      "cU": "mergeChatLines",
+      "dU": "normalizeRemains",
+      "eU": "setSession",
+      "fU": "altarDoc",
+      "gU": "toInventoryView",
+      "gu": "GateClient",
+      "iU": "refreshRoster",
+      "lU": "hydratePlayer",
+      "mU": "toOwnedItem",
+      "mu": "GateError",
+      "nU": "useRealmSession",
+      "oU": "toCharacterSummary",
+      "pU": "altarRiteEvents",
+      "qH": "realmRequest",
+      "rU": "connectGateSession",
+      "sU": "enterCharacter",
+      "tU": "subscribeSession",
+      "uU": "withAffixes",
+      "vU": "applyPartySnapshot",
+      "vf": "ZoneError",
+      "yU": "prunePartyStats"
+    },
+    "assets/index-BTsv3a2s-177.js": {
+      "KH": "activeZone",
+      "Nl": "forgetMageId",
+      "Pl": "resumeMage",
+      "QH": "realmSession",
+      "_U": "noopAsync",
+      "bU": "useGameApi",
+      "eU": "setSession",
+      "iU": "refreshRoster",
+      "jl": "lastMageId",
+      "mu": "GateError",
+      "oU": "toCharacterSummary",
+      "qH": "realmRequest",
+      "rU": "connectGateSession",
+      "sU": "enterCharacter",
+      "uU": "withAffixes",
+      "vU": "applyPartySnapshot"
+    },
+    "assets/index-BTsv3a2s-178.js": {
+      "GH": "GATE_BASE_URL",
+      "JH": "EMPTY_HOME",
+      "KH": "activeZone",
+      "Pl": "resumeMage",
+      "SU": "awsBackend",
+      "YH": "noteSeq",
+      "bU": "useGameApi",
+      "cU": "mergeChatLines",
+      "dU": "normalizeRemains",
+      "eU": "setSession",
+      "ec": "partyOfferRecord",
+      "fU": "altarDoc",
+      "gU": "toInventoryView",
+      "jl": "lastMageId",
+      "lU": "hydratePlayer",
+      "mU": "toOwnedItem",
+      "mu": "GateError",
+      "nU": "useRealmSession",
+      "oU": "toCharacterSummary",
+      "pU": "altarRiteEvents",
+      "rU": "connectGateSession",
+      "vU": "applyPartySnapshot",
+      "vf": "ZoneError",
+      "xU": "EMPTY_LIST",
+      "yU": "prunePartyStats"
+    },
+    "assets/index-BTsv3a2s-180.js": {
+      "BW": "awsShopsUnsupported",
+      "FW": "awsHomeStub",
+      "LW": "awsMagesStub",
+      "MW": "useConvexInventory",
+      "NW": "useConvexActions",
+      "RW": "awsChatUnsupported",
+      "VW": "awsHearthUnsupported",
+      "jW": "convexApi",
+      "zW": "awsSalvageUnsupported"
+    },
+    "assets/index-BTsv3a2s-181.js": {
+      "BW": "awsShopsUnsupported",
+      "FW": "awsHomeStub",
+      "GW": "ClassicCamera",
+      "HW": "convexBackend",
+      "IW": "awsMagesUnsupported",
+      "KW": "RENDER_SCALE",
+      "LW": "awsMagesStub",
+      "MW": "useConvexInventory",
+      "NW": "useConvexActions",
+      "PW": "awsUnsupported",
+      "RW": "awsChatUnsupported",
+      "UW": "backendParam",
+      "VW": "awsHearthUnsupported",
+      "WW": "activeBackend",
+      "jW": "convexApi",
+      "qW": "setRenderScaleMode",
+      "zW": "awsSalvageUnsupported"
+    },
+    "assets/index-BTsv3a2s-182.js": {
+      "KW": "RENDER_SCALE"
+    },
+    "assets/index-BTsv3a2s-235.js": {
+      "GW": "ClassicCamera",
+      "KW": "RENDER_SCALE",
+      "qW": "setRenderScaleMode"
+    },
+    "assets/index-BTsv3a2s-240.js": {
+      "WW": "activeBackend"
+    },
+    "assets/index-BTsv3a2s-249.js": {
+      "WW": "activeBackend"
+    },
+    "assets/index-BTsv3a2s-27.js": {
+      "ec": "partyOfferRecord"
+    },
+    "assets/index-BTsv3a2s-28.js": {
+      "Al": "LAST_MAGE_KEY",
+      "Dl": "DEVICE_TOKEN_KEY",
+      "Ml": "setLastMageId",
+      "Nl": "forgetMageId",
+      "Ol": "ensureDeviceToken",
+      "Pl": "resumeMage",
+      "Tl": "clearMageSave",
+      "jl": "lastMageId",
+      "kl": "rotateDeviceToken"
+    },
+    "assets/index-BTsv3a2s-281.js": {
+      "WW": "activeBackend"
+    },
+    "assets/index-BTsv3a2s-286.js": {
+      "Sf": "ZoneClient",
+      "WW": "activeBackend",
+      "gf": "parseRoomOverride",
+      "hf": "parseZoneOverride",
+      "vf": "ZoneError"
+    },
+    "assets/index-BTsv3a2s-289.js": {
+      "WW": "activeBackend"
+    },
+    "assets/index-BTsv3a2s-29.js": {
+      "_u": "gateBaseUrl",
+      "gu": "GateClient",
+      "hu": "delay",
+      "mu": "GateError"
+    },
+    "assets/index-BTsv3a2s-290.js": {
+      "Ol": "ensureDeviceToken",
+      "Pl": "resumeMage",
+      "WW": "activeBackend",
+      "jl": "lastMageId",
+      "kl": "rotateDeviceToken"
+    },
+    "assets/index-BTsv3a2s-34.js": {
+      "_f": "normalizeZoneUrl",
+      "bf": "describeTransportError",
+      "gf": "parseRoomOverride",
+      "hf": "parseZoneOverride",
+      "vf": "ZoneError",
+      "xf": "fetchDevTicket",
+      "yf": "ZONE_REQUEST_TIMEOUT"
+    },
+    "assets/index-BTsv3a2s-35.js": {
+      "Sf": "ZoneClient",
+      "_f": "normalizeZoneUrl",
+      "bf": "describeTransportError",
+      "vf": "ZoneError",
+      "xf": "fetchDevTicket",
+      "yf": "ZONE_REQUEST_TIMEOUT"
+    }
+  },
+  "scoped": {
+    "assets/hd2d-FOjpdF4f-03.js": {
+      "Et": [
+        [
+          396,
+          "QUAD_INDICES"
+        ],
+        [
+          525,
+          "QUAD_INDICES"
+        ]
+      ]
+    },
+    "assets/hd2d-FOjpdF4f-37.js": {
+      "du": [
+        [
+          3033,
+          "NO_LIGHTS"
+        ],
+        [
+          7812,
+          "NO_LIGHTS"
+        ]
+      ]
+    },
+    "assets/index-BTsv3a2s-176.js": {
+      "QH": [
+        [
+          756,
+          "realmSession"
+        ],
+        [
+          802,
+          "realmSession"
+        ],
+        [
+          808,
+          "realmSession"
+        ],
+        [
+          876,
+          "realmSession"
+        ],
+        [
+          888,
+          "realmSession"
+        ],
+        [
+          898,
+          "realmSession"
+        ],
+        [
+          949,
+          "realmSession"
+        ],
+        [
+          976,
+          "realmSession"
+        ],
+        [
+          984,
+          "realmSession"
+        ],
+        [
+          1028,
+          "realmSession"
+        ],
+        [
+          1164,
+          "realmSession"
+        ],
+        [
+          1187,
+          "realmSession"
+        ],
+        [
+          1196,
+          "realmSession"
+        ],
+        [
+          1457,
+          "realmSession"
+        ],
+        [
+          2646,
+          "realmSession"
+        ],
+        [
+          2768,
+          "realmSession"
+        ]
+      ],
+      "XH": [
+        [
+          664,
+          "EMPTY_PLAYER_STATE"
+        ],
+        [
+          783,
+          "EMPTY_PLAYER_STATE"
+        ],
+        [
+          938,
+          "EMPTY_PLAYER_STATE"
+        ],
+        [
+          1216,
+          "EMPTY_PLAYER_STATE"
+        ]
+      ],
+      "hU": [
+        [
+          2437,
+          "EMPTY_MATS"
+        ],
+        [
+          2562,
+          "EMPTY_MATS"
+        ]
+      ]
+    },
+    "assets/index-BTsv3a2s-178.js": {
+      "QH": [
+        [
+          1111,
+          "realmSession"
+        ],
+        [
+          1166,
+          "realmSession"
+        ],
+        [
+          1225,
+          "realmSession"
+        ],
+        [
+          1328,
+          "realmSession"
+        ],
+        [
+          1423,
+          "realmSession"
+        ],
+        [
+          1491,
+          "realmSession"
+        ],
+        [
+          1569,
+          "realmSession"
+        ],
+        [
+          1656,
+          "realmSession"
+        ],
+        [
+          1687,
+          "realmSession"
+        ],
+        [
+          1729,
+          "realmSession"
+        ],
+        [
+          1764,
+          "realmSession"
+        ],
+        [
+          1813,
+          "realmSession"
+        ],
+        [
+          1850,
+          "realmSession"
+        ],
+        [
+          1860,
+          "realmSession"
+        ],
+        [
+          1912,
+          "realmSession"
+        ],
+        [
+          2026,
+          "realmSession"
+        ],
+        [
+          2033,
+          "realmSession"
+        ],
+        [
+          2049,
+          "realmSession"
+        ],
+        [
+          2098,
+          "realmSession"
+        ],
+        [
+          2104,
+          "realmSession"
+        ],
+        [
+          2112,
+          "realmSession"
+        ],
+        [
+          2134,
+          "realmSession"
+        ],
+        [
+          2145,
+          "realmSession"
+        ],
+        [
+          2156,
+          "realmSession"
+        ],
+        [
+          2178,
+          "realmSession"
+        ],
+        [
+          2213,
+          "realmSession"
+        ],
+        [
+          2517,
+          "realmSession"
+        ],
+        [
+          2676,
+          "realmSession"
+        ]
+      ]
+    },
+    "assets/index-BTsv3a2s-181.js": {
+      "SU": [
+        [
+          820,
+          "awsBackend"
+        ]
+      ]
+    }
+  }
+}

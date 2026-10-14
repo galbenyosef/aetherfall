@@ -102,7 +102,7 @@ var Ss = class {
         pass: `cut`,
         fog: this.o.fog,
       });
-      _t(t, !0);
+      setHdSpace(t, !0);
       let n = Tr({ map: e, lit: this.o.lit, occl: this.occl, pass: `shadow` });
       this.mats = [t, n];
       let r = new I(Or(this.arrays), t);

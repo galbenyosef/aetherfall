@@ -117,7 +117,7 @@ function wl(e, t) {
     return !1;
   }
 }
-function Tl(e) {
+function clearMageSave(e) {
   try {
     localStorage.removeItem(Sl(e));
   } catch {}
@@ -126,35 +126,35 @@ function El(e, t, n = []) {
   let r = [...new Set([...e, ...n])].filter((e) => e !== t);
   return (r.push(t), r.slice(-256));
 }
-var Dl = `aetherfall.token`;
-function Ol() {
-  let e = localStorage.getItem(Dl);
-  return (e || ((e = crypto.randomUUID()), localStorage.setItem(Dl, e)), e);
+var DEVICE_TOKEN_KEY = `aetherfall.token`;
+function ensureDeviceToken() {
+  let e = localStorage.getItem(DEVICE_TOKEN_KEY);
+  return (e || ((e = crypto.randomUUID()), localStorage.setItem(DEVICE_TOKEN_KEY, e)), e);
 }
-function kl() {
+function rotateDeviceToken() {
   let e = crypto.randomUUID();
-  return (localStorage.setItem(Dl, e), e);
+  return (localStorage.setItem(DEVICE_TOKEN_KEY, e), e);
 }
-var Al = `aetherfall.lastMage`;
-function jl() {
+var LAST_MAGE_KEY = `aetherfall.lastMage`;
+function lastMageId() {
   try {
-    return localStorage.getItem(Al);
+    return localStorage.getItem(LAST_MAGE_KEY);
   } catch {
     return null;
   }
 }
-function Ml(e) {
+function setLastMageId(e) {
   try {
-    localStorage.setItem(Al, e);
+    localStorage.setItem(LAST_MAGE_KEY, e);
   } catch {}
 }
-function Nl(e) {
+function forgetMageId(e) {
   try {
-    localStorage.getItem(Al) === e && localStorage.removeItem(Al);
+    localStorage.getItem(LAST_MAGE_KEY) === e && localStorage.removeItem(LAST_MAGE_KEY);
   } catch {}
-  Tl(e);
+  clearMageSave(e);
 }
-function Pl(e, ...t) {
+function resumeMage(e, ...t) {
   for (let n of t) {
     let t = n ? e.find((e) => e.id === n) : void 0;
     if (t) return t;

@@ -157,26 +157,26 @@ var df = new q(),
       ca: !1,
     },
   },
-  gf = [`high`, `medium`, `low`, `minimal`],
+  QUALITY_TIERS = [`high`, `medium`, `low`, `minimal`],
   _f = (e, t, n) => ({ sx: e, sy: t - n }),
-  vf = 32,
-  yf = 16,
-  bf = `${xu}
+  MAX_POINT_LIGHTS = 32,
+  MAX_LINE_LIGHTS = 16,
+  SHADER_HEADER = `${xu}
 in vec2 vUv; out vec4 o;
 uniform vec4 uCam;   // camX, camY, rt width, rt height (art px)
-uniform vec4 uPt[${vf}]; uniform vec4 uPtC[${vf}]; uniform int uPtN;
-uniform vec4 uLnA[${yf}]; uniform vec4 uLnB[${yf}]; uniform vec4 uLnC[${yf}]; uniform int uLnN;
+uniform vec4 uPt[${MAX_POINT_LIGHTS}]; uniform vec4 uPtC[${MAX_POINT_LIGHTS}]; uniform int uPtN;
+uniform vec4 uLnA[${MAX_LINE_LIGHTS}]; uniform vec4 uLnB[${MAX_LINE_LIGHTS}]; uniform vec4 uLnC[${MAX_LINE_LIGHTS}]; uniform int uLnN;
 uniform vec3 uAmb; uniform float uEnc;
 void main() {
   vec3 P = vec3(uCam.xy + vec2(vUv.x, 1.0 - vUv.y) * uCam.zw, 0.0);
   vec3 L = uAmb;
-  for (int i = 0; i < ${vf}; i++) {
+  for (int i = 0; i < ${MAX_POINT_LIGHTS}; i++) {
     if (i >= uPtN) break;
     vec3 d = P - uPt[i].xyz;
     float r = uPt[i].w, dd = dot(d, d);
     L += uPtC[i].rgb * (r * r / (r * r + dd)) * exp(-sqrt(dd) / (r * 3.0));
   }
-  for (int i = 0; i < ${yf}; i++) {
+  for (int i = 0; i < ${MAX_LINE_LIGHTS}; i++) {
     if (i >= uLnN) break;
     vec3 a = uLnA[i].xyz, ab = uLnB[i].xyz - a;
     float t = clamp(dot(P - a, ab) / max(dot(ab, ab), 1e-3), 0.0, 1.0);

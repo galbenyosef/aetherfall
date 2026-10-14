@@ -1,51 +1,51 @@
-// index-BTsv3a2s 181 — aws
+// index-BTsv3a2s 181 — awsunsupported
 // Lines 105678-105799 of readable/assets/index-BTsv3a2s.pretty.js (statement-aligned).
-var PW = () =>
+var awsUnsupported = () =>
     Promise.reject(Error(`Homesteads are on the AWS realm (?backend=aws).`)),
-  FW = {
-    go: PW,
-    leave: PW,
-    invite: PW,
-    visit: PW,
-    kick: PW,
-    build: PW,
-    unbuild: PW,
-    deed: PW,
-    drawWater: PW,
-    plant: PW,
-    water: PW,
-    dust: PW,
-    harvest: PW,
-    put: PW,
-    take: PW,
-    craft: PW,
-    consume: PW,
-    sell: PW,
-    buySeeds: PW,
-    houseDoor: PW,
-    paint: PW,
-    furnish: PW,
-    unfurnish: PW,
-    rest: PW,
+  awsHomeStub = {
+    go: awsUnsupported,
+    leave: awsUnsupported,
+    invite: awsUnsupported,
+    visit: awsUnsupported,
+    kick: awsUnsupported,
+    build: awsUnsupported,
+    unbuild: awsUnsupported,
+    deed: awsUnsupported,
+    drawWater: awsUnsupported,
+    plant: awsUnsupported,
+    water: awsUnsupported,
+    dust: awsUnsupported,
+    harvest: awsUnsupported,
+    put: awsUnsupported,
+    take: awsUnsupported,
+    craft: awsUnsupported,
+    consume: awsUnsupported,
+    sell: awsUnsupported,
+    buySeeds: awsUnsupported,
+    houseDoor: awsUnsupported,
+    paint: awsUnsupported,
+    furnish: awsUnsupported,
+    unfurnish: awsUnsupported,
+    rest: awsUnsupported,
   },
-  IW = () =>
+  awsMagesUnsupported = () =>
     Promise.reject(
       new iW(`Several mages per account are on the AWS realm (?backend=aws).`),
     ),
-  LW = { play: IW, forge: IW, remove: IW, refresh: IW },
-  RW = () =>
+  awsMagesStub = { play: awsMagesUnsupported, forge: awsMagesUnsupported, remove: awsMagesUnsupported, refresh: awsMagesUnsupported },
+  awsChatUnsupported = () =>
     Promise.reject(
       new iW(`Nearby chat and whispers are on the AWS realm (?backend=aws).`),
     ),
-  zW = () =>
+  awsSalvageUnsupported = () =>
     Promise.reject(
       new iW(`Salvaging several at once is on the AWS realm (?backend=aws).`),
     ),
-  BW = () =>
+  awsShopsUnsupported = () =>
     Promise.reject(new iW(`Shops are on the AWS realm (?backend=aws).`)),
-  VW = () =>
+  awsHearthUnsupported = () =>
     Promise.reject(new iW(`Hearthsong is on the AWS realm (?backend=aws).`)),
-  HW = {
+  convexBackend = {
     name: `convex`,
     Root: null,
     setup: (0, Q.jsxs)(`div`, {
@@ -79,27 +79,27 @@ var PW = () =>
         }),
       ],
     }),
-    useMe: (e) => yW(jW.players.me, { token: e }),
+    useMe: (e) => yW(convexApi.players.me, { token: e }),
     useRoster: () => null,
-    useOnlinePlayers: () => yW(jW.players.online),
-    useMonsters: (e) => yW(jW.combat.monsters, e ? {} : `skip`),
-    useRecentFx: (e) => yW(jW.combat.recentFx, e ? {} : `skip`),
-    useChat: () => yW(jW.chat.recent),
-    useInventory: MW,
-    useGround: (e) => yW(jW.items.ground, { token: e }),
-    useQuests: (e) => yW(jW.quests.mine, { token: e }),
-    useAltars: () => yW(jW.altars.list),
-    useDelves: (e) => yW(jW.dungeons.state, { token: e }),
+    useOnlinePlayers: () => yW(convexApi.players.online),
+    useMonsters: (e) => yW(convexApi.combat.monsters, e ? {} : `skip`),
+    useRecentFx: (e) => yW(convexApi.combat.recentFx, e ? {} : `skip`),
+    useChat: () => yW(convexApi.chat.recent),
+    useInventory: useConvexInventory,
+    useGround: (e) => yW(convexApi.items.ground, { token: e }),
+    useQuests: (e) => yW(convexApi.quests.mine, { token: e }),
+    useAltars: () => yW(convexApi.altars.list),
+    useDelves: (e) => yW(convexApi.dungeons.state, { token: e }),
     useHome: () => null,
-    useActions: NW,
+    useActions: useConvexActions,
     userError: (e) => (e instanceof iW ? String(e.data) : null),
   },
-  UW =
+  backendParam =
     (typeof location < `u` &&
       new URLSearchParams(location.search).get(`backend`)) ||
     `aws`,
-  WW = UW === `aws` || (UW !== `convex` && !HW.Root) ? SU : HW,
-  GW = class {
+  activeBackend = backendParam === `aws` || (backendParam !== `convex` && !convexBackend.Root) ? awsBackend : convexBackend,
+  ClassicCamera = class {
     camX;
     camY;
     kind = `classic`;
@@ -116,9 +116,9 @@ var PW = () =>
       return this.toScreen(e, t, n);
     }
   },
-  KW = { cos: 0.7, aoe: 0.7, decal: 0.6, fx: 0.7 };
-function qW(e) {
+  RENDER_SCALE = { cos: 0.7, aoe: 0.7, decal: 0.6, fx: 0.7 };
+function setRenderScaleMode(e) {
   e === `hd2d`
-    ? ((KW.cos = 1), (KW.aoe = 1 / 1.15), (KW.decal = 1), (KW.fx = 1))
-    : ((KW.cos = 0.7), (KW.aoe = 0.7), (KW.decal = 0.6), (KW.fx = 0.7));
+    ? ((RENDER_SCALE.cos = 1), (RENDER_SCALE.aoe = 1 / 1.15), (RENDER_SCALE.decal = 1), (RENDER_SCALE.fx = 1))
+    : ((RENDER_SCALE.cos = 0.7), (RENDER_SCALE.aoe = 0.7), (RENDER_SCALE.decal = 0.6), (RENDER_SCALE.fx = 0.7));
 }

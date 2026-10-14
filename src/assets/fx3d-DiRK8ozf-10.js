@@ -1,6 +1,6 @@
 // fx3d-DiRK8ozf 10 — math
 // Lines 31074-31960 of readable/assets/fx3d-DiRK8ozf.pretty.js (statement-aligned).
-var kf = class {
+var Fx3dLayer = class {
   sceneCanvas;
   canvas;
   renderer;
@@ -125,7 +125,7 @@ var kf = class {
         )),
       (this.shared = {
         uTime: { value: 0 },
-        uRamp: { value: Fu() },
+        uRamp: { value: buildPaletteTexture() },
         uWH: { value: new U(1, 1) },
         uView: { value: sd.clone() },
         uSV: { value: [new W(1, 0, 0), new W(0, 1, -1)] },
@@ -187,16 +187,16 @@ var kf = class {
         this.orbs.mesh,
         this.ribbons.mesh,
       ),
-      (this.light = new Ef(bf, {
+      (this.light = new Ef(SHADER_HEADER, {
         uCam: d,
         uAmb: { value: new W(1, 1, 1) },
         uEnc: { value: 1 },
-        uPt: Df(vf),
-        uPtC: Df(vf),
+        uPt: Df(MAX_POINT_LIGHTS),
+        uPtC: Df(MAX_POINT_LIGHTS),
         uPtN: { value: 0 },
-        uLnA: Df(yf),
-        uLnB: Df(yf),
-        uLnC: Df(yf),
+        uLnA: Df(MAX_LINE_LIGHTS),
+        uLnB: Df(MAX_LINE_LIGHTS),
+        uLnC: Df(MAX_LINE_LIGHTS),
         uLnN: { value: 0 },
       })));
     let m = this.dsrc;
@@ -285,7 +285,7 @@ var kf = class {
   }
   applyQuality() {
     let e =
-      this.cap && gf.indexOf(this.cap) > gf.indexOf(this.own)
+      this.cap && QUALITY_TIERS.indexOf(this.cap) > QUALITY_TIERS.indexOf(this.own)
         ? this.cap
         : this.own;
     ((this.quality = e), Object.assign(this.settings, hf[e]), this.applyUser());
@@ -334,11 +334,11 @@ var kf = class {
     )
       return;
     this.slow = 0;
-    let n = gf.indexOf(this.own);
-    n < gf.length - 1
-      ? (this.setQuality(gf[n + 1]),
+    let n = QUALITY_TIERS.indexOf(this.own);
+    n < QUALITY_TIERS.length - 1
+      ? (this.setQuality(QUALITY_TIERS[n + 1]),
         console.info(
-          `3D attack FX: frames were slow, quality ${gf[n]} -> ${gf[n + 1]} (${this.gpu})`,
+          `3D attack FX: frames were slow, quality ${QUALITY_TIERS[n]} -> ${QUALITY_TIERS[n + 1]} (${this.gpu})`,
         ))
       : ((this.off = !0),
         console.info(
@@ -414,7 +414,7 @@ var kf = class {
     this.final.u.uArt.value.set(m, h);
   }
   lightFromRamp(e, t, n, r, i, a, o, s, c = !1, l = 3) {
-    let [u, d, f] = Pu(r, l),
+    let [u, d, f] = paletteColor(r, l),
       p = {
         x: e,
         y: t,
@@ -431,7 +431,7 @@ var kf = class {
     return (this.lights.push(p), p);
   }
   lightLine(e, t, n, r, i, a, o, s = 3) {
-    let [c, l, u] = Pu(n, s),
+    let [c, l, u] = paletteColor(n, s),
       d = { a: e, b: t, r: c, g: l, b2: u, I: r, rad: i, life: a, t0: o };
     return (
       this.lines.push(d),
@@ -730,7 +730,7 @@ var kf = class {
         this.lights.splice(t, 1);
         continue;
       }
-      r < 0 || o(n.x, n.y, n.z, n.r, n.g, n.b, n.I * Af(n, r) * 0.5, n.rad);
+      r < 0 || o(n.x, n.y, n.z, n.r, n.g, n.b, n.I * lightFalloff(n, r) * 0.5, n.rad);
     }
     for (let t = this.lines.length - 1; t >= 0; t--) {
       let n = this.lines[t],
@@ -755,7 +755,7 @@ var kf = class {
         a++);
     }
     for (let t of this.beams.segments(e)) {
-      let [e, n, r] = Pu(t.ramp, 3),
+      let [e, n, r] = paletteColor(t.ramp, 3),
         i = s();
       ((i.a[0] = t.s.x + (t.e.x - t.s.x) * 0.3),
         (i.a[1] = t.s.y + (t.e.y - t.s.y) * 0.3),
@@ -837,8 +837,8 @@ var kf = class {
         this.lights.splice(t, 1);
         continue;
       }
-      if (o < 0 || a >= vf) continue;
-      let s = n.I * Af(n, o) * 0.5;
+      if (o < 0 || a >= MAX_POINT_LIGHTS) continue;
+      let s = n.I * lightFalloff(n, o) * 0.5;
       (r[a].set(n.x, n.y, n.z, n.rad),
         i[a].set(n.r * s, n.g * s, n.b * s, 0),
         a++);
@@ -854,7 +854,7 @@ var kf = class {
         this.lines.splice(t, 1);
         continue;
       }
-      if (r < 0 || l >= yf) continue;
+      if (r < 0 || l >= MAX_LINE_LIGHTS) continue;
       let i = r / n.life,
         a = n.I * (1 - i) * 0.5;
       (o[l].set(n.a[0], n.a[1], n.a[2], n.rad),
@@ -863,8 +863,8 @@ var kf = class {
         l++);
     }
     for (let t of this.beams.segments(e)) {
-      if (l >= yf) break;
-      let [e, n, u] = Pu(t.ramp, 3),
+      if (l >= MAX_LINE_LIGHTS) break;
+      let [e, n, u] = paletteColor(t.ramp, 3),
         d = 0.7 * t.I * t.k;
       (o[l].set(
         t.s.x + (t.e.x - t.s.x) * 0.3,
@@ -876,7 +876,7 @@ var kf = class {
         c[l].set(e * d, n * d, u * d, 0),
         l++,
         t.e.z < 2 &&
-          a < vf &&
+          a < MAX_POINT_LIGHTS &&
           (r[a].set(t.e.x, t.e.y, 2, 16),
           i[a].set(e * 0.8 * t.k, n * 0.8 * t.k, u * 0.8 * t.k, 0),
           a++));

@@ -1,7 +1,7 @@
 // index-BTsv3a2s 290 — school
 // Lines 175753-175921 of readable/assets/index-BTsv3a2s.pretty.js (statement-aligned).
 function $de() {
-  let [e, t] = (0, v.useState)(Ol),
+  let [e, t] = (0, v.useState)(ensureDeviceToken),
     [n, r] = (0, v.useState)(`title`),
     [i, a] = (0, v.useState)(null),
     [o, s] = (0, v.useState)(null),
@@ -9,12 +9,12 @@ function $de() {
     [u, d] = (0, v.useState)(null),
     [f, p] = (0, v.useState)(!1),
     [m, h] = (0, v.useState)(!1),
-    g = WW.useMe(e),
-    _ = WW.useRoster(e),
-    y = WW.useActions(e),
-    b = _ ? Pl(_.mages, u, jl()) : null,
+    g = activeBackend.useMe(e),
+    _ = activeBackend.useRoster(e),
+    y = activeBackend.useActions(e),
+    b = _ ? resumeMage(_.mages, u, lastMageId()) : null,
     x = (e) =>
-      s(WW.userError(e) ?? (e instanceof Error ? e.message : String(e))),
+      s(activeBackend.userError(e) ?? (e instanceof Error ? e.message : String(e))),
     S = async (e) => {
       if (!f) {
         (p(!0), s(null));
@@ -32,7 +32,7 @@ function $de() {
       S(async () => {
         let a = e;
         return (
-          i && ((a = kl()), t(a)),
+          i && ((a = rotateDeviceToken()), t(a)),
           { playerId: await y.join(a, n, r), name: n, school: r }
         );
       }),
@@ -157,7 +157,7 @@ var efe = {
     return n ? [{ id: e.slice(2, -5), meta: t, url: n }] : [];
   }),
   Q9 = (0, y.createRoot)(document.getElementById(`root`)),
-  { Root: $9 } = WW;
+  { Root: $9 } = activeBackend;
 Promise.all([Dre(), aM(), mK(), zm(), cR(), lj(), Zp(afe)]).then(() => {
   $9
     ? Q9.render(
@@ -167,5 +167,5 @@ Promise.all([Dre(), aM(), mK(), zm(), cR(), lj(), Zp(afe)]).then(() => {
           }),
         }),
       )
-    : Q9.render(WW.setup);
+    : Q9.render(activeBackend.setup);
 });

@@ -221,8 +221,8 @@ var Qo = class {
       !this.stat && !this.dyn)
     ) {
       ((c.uShadowOn.value = 0),
-        (c.uSunStatic.value = ft()),
-        (c.uSunDynamic.value = ft()),
+        (c.uSunStatic.value = getShadowDepthTexture()),
+        (c.uSunDynamic.value = getShadowDepthTexture()),
         (this.box = null));
       return;
     }
@@ -253,8 +253,8 @@ var Qo = class {
         (this.drawInto(e, this.dyn, s),
         (this.stats.dynamicCasters = this.pass.count)),
       c.uSunMat.value.copy(this.mat),
-      (c.uSunStatic.value = this.stat?.depthTexture ?? ft()),
-      (c.uSunDynamic.value = this.dyn?.depthTexture ?? ft()),
+      (c.uSunStatic.value = this.stat?.depthTexture ?? getShadowDepthTexture()),
+      (c.uSunDynamic.value = this.dyn?.depthTexture ?? getShadowDepthTexture()),
       c.uSunTexel.value.set(this.stat ? 1 / r : 1, this.dyn ? 1 / i : 1),
       (c.uShadowOn.value = +!!this.stat + (this.dyn ? 2 : 0)));
   }

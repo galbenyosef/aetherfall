@@ -157,7 +157,7 @@ var gi = class {
         w.expandByPoint(this.corner));
     }
     this.n = S;
-    for (let e of [K.foot, K.rect, K.box]) {
+    for (let e of [ATTRIB.foot, ATTRIB.rect, ATTRIB.box]) {
       let t = this.geo.getAttribute(e);
       (t.clearUpdateRanges(),
         S > 0 && (t.addUpdateRange(0, S * 4), (t.needsUpdate = !0)));
@@ -246,7 +246,7 @@ var gi = class {
   }
   makeGeometry(e, t) {
     let n = new Le(),
-      r = Dt();
+      r = createQuadGeometry();
     (n.setAttribute(`position`, r.getAttribute(`position`)),
       n.setIndex(r.getIndex()));
     let i = (t) => {
@@ -257,9 +257,9 @@ var gi = class {
       (this.rect = i(this.rect)),
       (this.box = i(this.box)));
     for (let [e, t] of [
-      [K.foot, this.foot],
-      [K.rect, this.rect],
-      [K.box, this.box],
+      [ATTRIB.foot, this.foot],
+      [ATTRIB.rect, this.rect],
+      [ATTRIB.box, this.box],
     ]) {
       let r = new we(t, 4);
       (r.setUsage(G), n.setAttribute(e, r));

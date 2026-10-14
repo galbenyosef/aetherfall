@@ -36,7 +36,7 @@ function Qs(e) {
 function $s(e) {
   return !!e && e.members.length >= Ns.max;
 }
-function ec(e, t, n) {
+function partyOfferRecord(e, t, n) {
   let r = typeof t.left == `number` ? n + Math.max(0, t.left) : t.until;
   return {
     kind: e,

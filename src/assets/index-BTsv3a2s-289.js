@@ -54,7 +54,7 @@ function Xde({
               ref: p,
               className: `panel help-panel`,
               children: (0, Q.jsx)(mce, {
-                aws: WW.name === `aws`,
+                aws: activeBackend.name === `aws`,
                 homes: o,
                 muted: d,
                 onMute: X9,

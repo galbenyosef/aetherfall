@@ -45,7 +45,7 @@ function Tde({ dev: e, onGod: t, onJump: n }) {
         S([
           {
             text:
-              WW.userError(e) ?? (e instanceof Error ? e.message : String(e)),
+              activeBackend.userError(e) ?? (e instanceof Error ? e.message : String(e)),
             tone: `err`,
           },
         ]),

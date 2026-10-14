@@ -87,7 +87,7 @@ var es = class {
       );
     }
     off(e) {
-      ((e.uHeroOn.value = 0), (e.uHero.value = ft()));
+      ((e.uHeroOn.value = 0), (e.uHero.value = getShadowDepthTexture()));
     }
     dispose() {
       (this.rt?.dispose(), (this.rt = null));

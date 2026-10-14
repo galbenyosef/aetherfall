@@ -43,7 +43,7 @@ function Fl(e, t, n) {
 function Il(e) {
   e.traverse((e) => {
     let t = e.material;
-    if (t) for (let e of Array.isArray(t) ? t : [t]) vt(e) && _t(e, !0);
+    if (t) for (let e of Array.isArray(t) ? t : [t]) isHdFogMaterial(e) && setHdSpace(e, !0);
   });
 }
 function Ll(e) {

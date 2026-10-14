@@ -42,7 +42,7 @@ var zi = 320,
     buildCpu() {
       ((this.ver = a()), (this.glbVer = Br()));
       let e = this.host.scenery,
-        t = new et(),
+        t = new TextureAtlas(),
         n = [],
         r = [],
         i = [],

@@ -28,7 +28,7 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
     let [n, r, a] = i(e);
     return t.setRGB(n / 255, r / 255, a / 255, Ee);
   },
-  cu = class {
+  Hd2dRenderer = class {
     host;
     fx3d;
     view;
@@ -115,7 +115,7 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
           (this.fx3d = Me(e.scene, e.depthC, { renderer: n })));
         let i = this.fx3d.layer.pools;
         this.fxCasters = [i.shard.mesh, i.prism.mesh, i.core.mesh, i.rock.mesh];
-        let a = Object.assign(pt(), St());
+        let a = Object.assign(createHd2dUniforms(), createSpaceFogUniforms());
         ((this.lit = a),
           (this.lights = new Za(a)),
           (this.overlay = new sa(a)),
@@ -381,7 +381,7 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
           e.me,
           !o || (E.spaceHero ? `torch` : !1),
           C,
-          o ? du : this.scenery.lights(),
+          o ? NO_LIGHTS : this.scenery.lights(),
         ));
       let w = this.lights.heroSkip();
       (this.lit.uHeroSkip.value.set(w.x, w.y, o ? w.r : 0),
@@ -478,7 +478,7 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
           this.grade.copy(tu));
       }
       let te = 1 - Math.min(1, (l ? l.dark : e.dark) / 0.5),
-        ne = l ? mo.ao * uu.ao : mo.ao;
+        ne = l ? mo.ao * defaultToggles.ao : mo.ao;
       return (
         (k.atmos =
           this.cal || f === `minimal`
@@ -488,7 +488,7 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
                 M: t.cam.M,
                 eye: t.cam.eye,
                 ao: ne,
-                rays: u ? mo.rays * (l ? uu.rays : 1) * te : 0,
+                rays: u ? mo.rays * (l ? defaultToggles.rays : 1) * te : 0,
                 steps: f === `high` ? 20 : f === `medium` ? 14 : 8,
                 time: this.host.time,
               }),
@@ -514,16 +514,16 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
       (r.uNight.value.setRGB(o[0], o[1], o[2]),
         i
           ? r.uLift.value.setRGB(0, 0, 0)
-          : r.uLift.value.setRGB(yt[0] * a, yt[1] * a, yt[2] * a),
+          : r.uLift.value.setRGB(NIGHT_FOG[0] * a, NIGHT_FOG[1] * a, NIGHT_FOG[2] * a),
         this.lights.sky(e ? e.dark : t, n));
     }
     clearOf(e) {
       let t = e.sun ? 0 : Math.min(1, Math.max(0, e.dark)),
         n = (e, n) => (e / 255) * (1 - t) + n * t;
       return this.clear.setRGB(
-        n((e.bg >> 16) & 255, yt[0]),
-        n((e.bg >> 8) & 255, yt[1]),
-        n(e.bg & 255, yt[2]),
+        n((e.bg >> 16) & 255, NIGHT_FOG[0]),
+        n((e.bg >> 8) & 255, NIGHT_FOG[1]),
+        n(e.bg & 255, NIGHT_FOG[2]),
         Ee,
       );
     }
@@ -537,17 +537,17 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
         (r.uFogH.value = Zl));
       let o = t ? t.dark : e.dark,
         s = this.cal ? 0 : Math.min(1, Math.max(0, o / 0.82));
-      (r.uNightFall.value.set(e.me.x, e.me.y, lu.nightReach, t ? 0 : s),
-        r.uCity.value.set(_ * 16 + 8, _e * 16 + 8, lu.cityR[0], lu.cityR[1]));
+      (r.uNightFall.value.set(e.me.x, e.me.y, rendererConfig.nightReach, t ? 0 : s),
+        r.uCity.value.set(_ * 16 + 8, _e * 16 + 8, rendererConfig.cityR[0], rendererConfig.cityR[1]));
       let c = this.host.time;
       (r.uCloud.value.set(
-        this.cal || !n ? 0 : lu.cloud * (1 - s),
-        1 / lu.cloudSize,
-        c * lu.wind[0],
-        c * lu.wind[1],
+        this.cal || !n ? 0 : rendererConfig.cloud * (1 - s),
+        1 / rendererConfig.cloudSize,
+        c * rendererConfig.wind[0],
+        c * rendererConfig.wind[1],
       ),
         (r.uSpFogOn.value = 0),
-        (r.uSpFogTex.value = r.uSpFogMask.value = xt()));
+        (r.uSpFogTex.value = r.uSpFogMask.value = getWhiteTexture()));
     }
     supports(e) {
       return !!ru[e] && !this.unsupported.has(e) && !O().off;
@@ -687,10 +687,10 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
         let r = n.material;
         if (r)
           for (let n of Array.isArray(r) ? r : [r]) {
-            if (!vt(n)) continue;
+            if (!isHdFogMaterial(n)) continue;
             let r = !!n.defines && `HD_SPACE` in n.defines;
             ((t || r !== e) && !this.twinned.has(n) && this.twins(n),
-              t || _t(n, e));
+              t || setHdSpace(n, e));
           }
       });
     }
@@ -700,7 +700,7 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
         n = new L();
       for (let r of [!1, !0]) {
         let i = { ...e.defines };
-        r ? (i[gt] = 1) : delete i[gt];
+        r ? (i[HD_SPACE] = 1) : delete i[HD_SPACE];
         let a = new H({
             glslVersion: e.glslVersion,
             vertexShader: e.vertexShader,
@@ -862,12 +862,12 @@ var Gl = new z(11 / 255, 7 / 255, 20 / 255),
         this.core.dispose());
     }
   },
-  lu = {
+  rendererConfig = {
     nightReach: 150,
     cityR: [1440, 1760],
     cloud: 0.3,
     cloudSize: 260,
     wind: [9, 4],
   },
-  uu = { ao: 1, rays: 1 },
-  du = [];
+  defaultToggles = { ao: 1, rays: 1 },
+  NO_LIGHTS = [];

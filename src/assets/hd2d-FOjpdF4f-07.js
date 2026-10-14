@@ -151,7 +151,7 @@ ${lt}
 ${ut}
 ${e}
 ${br}
-${Ct}
+${SHARPEN_GLSL}
 uniform sampler2D uMap;
 uniform sampler2D uNormal;
 uniform sampler2D uEmissive;

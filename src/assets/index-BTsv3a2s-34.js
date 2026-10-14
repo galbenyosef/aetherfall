@@ -50,14 +50,14 @@ var of = yu,
   ff = 0.75,
   pf = 4,
   mf = { down: 0, up: 1, right: 2, left: 3 };
-function hf(e = typeof location > `u` ? `` : location.search) {
+function parseZoneOverride(e = typeof location > `u` ? `` : location.search) {
   let t = (new URLSearchParams(e).get(`zone`) ?? void 0 ?? ``).trim();
-  return !t || t === `off` ? null : t === `auto` ? `auto` : _f(t);
+  return !t || t === `off` ? null : t === `auto` ? `auto` : normalizeZoneUrl(t);
 }
-function gf(e = typeof location > `u` ? `` : location.search) {
+function parseRoomOverride(e = typeof location > `u` ? `` : location.search) {
   return new URLSearchParams(e).get(`room`) || `marizon-1`;
 }
-function _f(e) {
+function normalizeZoneUrl(e) {
   let t = e.replace(/\/+$/, ``);
   return (
     t.startsWith(`wss://`)
@@ -71,7 +71,7 @@ function _f(e) {
     t
   );
 }
-var vf = class extends Error {
+var ZoneError = class extends Error {
     refused;
     unanswered;
     constructor(e, t = !1, n = !1) {
@@ -81,12 +81,12 @@ var vf = class extends Error {
         (this.unanswered = n));
     }
   },
-  yf = 1e4;
-function bf(e) {
+  ZONE_REQUEST_TIMEOUT = 1e4;
+function describeTransportError(e) {
   let t = e?.data;
   return typeof t == `string` ? t : e instanceof Error ? e.message : String(e);
 }
-function xf(e) {
+function fetchDevTicket(e) {
   return async (t, n) => {
     let r = new URLSearchParams({
         room: t,

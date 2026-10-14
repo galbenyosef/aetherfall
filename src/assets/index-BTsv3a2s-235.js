@@ -1750,7 +1750,7 @@ var Zse = { r: 0.6, a: 0.35 },
               Math.round(l.y + Math.sin(i) * a * 0.55 - 12 - n),
             );
           }
-        let u = KW.decal === 1;
+        let u = RENDER_SCALE.decal === 1;
         if (
           (e.drawImage(
             Kre(c, this.riteProgress(s), a, u),
@@ -2983,7 +2983,7 @@ var Zse = { r: 0.6, a: 0.35 },
     update(e) {
       this.lastRdt = e;
       let t = this.hdNow();
-      (qW(t ? (y6().cal ? `hdcal` : `hd2d`) : `classic`),
+      (setRenderScaleMode(t ? (y6().cal ? `hdcal` : `hd2d`) : `classic`),
         !t && this.hdLast && this.fx3d?.layer.obliqueView(),
         (this.real += e),
         this.real < this.slowUntil
@@ -5876,12 +5876,12 @@ var Zse = { r: 0.6, a: 0.35 },
         l = this.snap(this.cam.y - r / 2 + s),
         u = this.hdNow(),
         d = y6().cal;
-      if ((qW(u ? (d ? `hdcal` : `hd2d`) : `classic`), u)) {
+      if ((setRenderScaleMode(u ? (d ? `hdcal` : `hd2d`) : `classic`), u)) {
         let e = d ? this.snap(this.cam.x - n / 2) : this.cam.x - n / 2,
           i = d ? this.snap(this.cam.y - r / 2) : this.cam.y - r / 2;
         if (this.renderHd(u, t, n, r, d ? c : e + o, d ? l : i + s, e, i))
           return;
-        qW(`classic`);
+        setRenderScaleMode(`classic`);
       }
       this.hdLast &&
         ((this.hdLast = !1),
@@ -6062,7 +6062,7 @@ var Zse = { r: 0.6, a: 0.35 },
         e.fillRect(0, 0, n, r),
         (e.globalAlpha = 1),
         (e.globalCompositeOperation = `source-over`),
-        this.drawScreenFx(e, n, r, new GW(c, l)));
+        this.drawScreenFx(e, n, r, new ClassicCamera(c, l)));
       let O = this.display;
       O.imageSmoothingEnabled = !1;
       let k = this.meDoc.dead
@@ -6083,7 +6083,7 @@ var Zse = { r: 0.6, a: 0.35 },
         );
       } else O.drawImage(this.scene, 0, 0, n * i, r * i, 0, 0, n * t, r * t);
       O.filter = `none`;
-      let ee = new GW(c, l);
+      let ee = new ClassicCamera(c, l);
       (this.drawOverlayText(ee, t),
         this.story?.drawCard(
           O,
@@ -6499,7 +6499,7 @@ var Zse = { r: 0.6, a: 0.35 },
         ((e.globalAlpha = 0.45 * (r.life / r.max)),
           (e.fillStyle = r.color),
           e.beginPath(),
-          e.ellipse(r.x - t, r.y - n, r.r, r.r * KW.decal, 0, 0, Math.PI * 2),
+          e.ellipse(r.x - t, r.y - n, r.r, r.r * RENDER_SCALE.decal, 0, 0, Math.PI * 2),
           e.fill());
       e.globalAlpha = 1;
       for (let r of this.telegraphs) {
@@ -6509,7 +6509,7 @@ var Zse = { r: 0.6, a: 0.35 },
           r.x - t,
           r.y - n,
           r.r,
-          r.r * KW.aoe,
+          r.r * RENDER_SCALE.aoe,
           r.color,
           0.35 + 0.4 * Math.abs(Math.sin(this.time * 12)),
         ),
@@ -6518,7 +6518,7 @@ var Zse = { r: 0.6, a: 0.35 },
             r.x - t,
             r.y - n,
             r.r * i,
-            r.r * KW.aoe * i,
+            r.r * RENDER_SCALE.aoe * i,
             r.color,
             0.5,
           ));
@@ -6535,7 +6535,7 @@ var Zse = { r: 0.6, a: 0.35 },
             r.x * 16 - t,
             r.y * 16 - n,
             14.4,
-            14.4 * KW.aoe,
+            14.4 * RENDER_SCALE.aoe,
             `#bff5ff`,
             i,
           );
@@ -6548,7 +6548,7 @@ var Zse = { r: 0.6, a: 0.35 },
           c.x * 16 - t,
           c.y * 16 - n,
           c.r * 16,
-          c.r * 16 * KW.aoe,
+          c.r * 16 * RENDER_SCALE.aoe,
           `#ff4d3a`,
           r * 0.35,
         ),
@@ -6557,7 +6557,7 @@ var Zse = { r: 0.6, a: 0.35 },
             c.x * 16 - t,
             c.y * 16 - n,
             25.6,
-            25.6 * KW.aoe,
+            25.6 * RENDER_SCALE.aoe,
             `#ff4d3a`,
             r,
           ),
@@ -6567,7 +6567,7 @@ var Zse = { r: 0.6, a: 0.35 },
               c.x * 16 - t,
               c.y * 16 - n,
               25.6 * c.seal,
-              25.6 * KW.aoe * c.seal,
+              25.6 * RENDER_SCALE.aoe * c.seal,
               `#8ef6ff`,
               0.8,
             ));
@@ -6949,7 +6949,7 @@ var Zse = { r: 0.6, a: 0.35 },
           r.x - t,
           r.y - n,
           r.max * x8(i),
-          r.max * x8(i) * KW.cos,
+          r.max * x8(i) * RENDER_SCALE.cos,
           r.color,
           1 - i,
         );

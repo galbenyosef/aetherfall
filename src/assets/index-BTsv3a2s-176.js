@@ -1,4 +1,4 @@
-// index-BTsv3a2s 176 — school
+// index-BTsv3a2s 176 — realmsession
 // Lines 104153-104466 of readable/assets/index-BTsv3a2s.pretty.js (statement-aligned).
 function Kae(e, t, n) {
   let r = Math.round(t.x - n.x),
@@ -57,19 +57,19 @@ var WH = o((e) => {
   Q = o((e, t) => {
     t.exports = WH();
   })(),
-  GH = _u(),
-  KH = null,
-  qH = (e, t) =>
-    KH
-      ? KH.request(e, t)
+  GATE_BASE_URL = gateBaseUrl(),
+  activeZone = null,
+  realmRequest = (e, t) =>
+    activeZone
+      ? activeZone.request(e, t)
       : Promise.reject(
-          new vf(
+          new ZoneError(
             `Not connected to the realm right now. Try again in a moment.`,
           ),
         ),
-  JH = { here: null, provisions: null, invites: [], notes: [] },
-  YH = 0,
-  XH = {
+  EMPTY_HOME = { here: null, provisions: null, invites: [], notes: [] },
+  noteSeq = 0,
+  EMPTY_PLAYER_STATE = {
     me: null,
     mats: null,
     inv: null,
@@ -81,7 +81,7 @@ var WH = o((e) => {
     remains: void 0,
     wanted: void 0,
     writ: null,
-    home: JH,
+    home: EMPTY_HOME,
     party: void 0,
     offers: [],
     partyClosed: !1,
@@ -89,68 +89,68 @@ var WH = o((e) => {
     partyStats: {},
     partyHere: null,
   },
-  ZH = 8,
-  QH = {
+  MAX_CHARACTERS = 8,
+  realmSession = {
     token: null,
     client: null,
     characters: void 0,
-    max: ZH,
+    max: MAX_CHARACTERS,
     charactersError: null,
-    ...XH,
+    ...EMPTY_PLAYER_STATE,
   },
-  $H = new Set(),
-  eU = (e) => {
-    QH = { ...QH, ...e };
-    for (let e of $H) e();
+  sessionListeners = new Set(),
+  setSession = (e) => {
+    realmSession = { ...realmSession, ...e };
+    for (let e of sessionListeners) e();
   },
-  tU = (e) => ($H.add(e), () => $H.delete(e)),
-  nU = () => (0, v.useSyncExternalStore)(tU, () => QH);
-function rU(e) {
+  subscribeSession = (e) => (sessionListeners.add(e), () => sessionListeners.delete(e)),
+  useRealmSession = () => (0, v.useSyncExternalStore)(subscribeSession, () => realmSession);
+function connectGateSession(e) {
   return (
-    (QH.token !== e || !QH.client) &&
-      (eU({
+    (realmSession.token !== e || !realmSession.client) &&
+      (setSession({
         token: e,
-        client: new gu(GH, e),
+        client: new GateClient(GATE_BASE_URL, e),
         characters: void 0,
-        max: ZH,
+        max: MAX_CHARACTERS,
         charactersError: null,
-        ...XH,
+        ...EMPTY_PLAYER_STATE,
       }),
-      iU(e)),
-    QH.client
+      refreshRoster(e)),
+    realmSession.client
   );
 }
-async function iU(e) {
+async function refreshRoster(e) {
   try {
-    let { characters: t, max: n } = await QH.client.roster();
-    QH.token === e && eU({ characters: t, max: n, charactersError: null });
+    let { characters: t, max: n } = await realmSession.client.roster();
+    realmSession.token === e && setSession({ characters: t, max: n, charactersError: null });
   } catch (t) {
     (console.warn(`gate:`, t),
-      QH.token === e &&
-        eU({
+      realmSession.token === e &&
+        setSession({
           characters: [],
-          charactersError: t instanceof mu ? t.message : String(t),
+          charactersError: t instanceof GateError ? t.message : String(t),
         }));
   }
 }
-var aU = (e) => (e === `f` ? `f` : `m`);
-function oU(e) {
+var normalizeHeroKind = (e) => (e === `f` ? `f` : `m`);
+function toCharacterSummary(e) {
   return {
     id: e.id,
     name: e.name,
     level: e.level,
     school: e.school,
-    hero: aU(e.hero),
+    hero: normalizeHeroKind(e.hero),
   };
 }
-async function sU(e, t) {
+async function enterCharacter(e, t) {
   let { profile: n } = await e.character(t.id),
-    r = QH.characters?.some((e) => e.id === t.id)
-      ? QH.characters
-      : [...(QH.characters ?? []), t];
-  return (eU({ ...XH, characters: r, me: lU(t, n) }), Ml(t.id), t.id);
+    r = realmSession.characters?.some((e) => e.id === t.id)
+      ? realmSession.characters
+      : [...(realmSession.characters ?? []), t];
+  return (setSession({ ...EMPTY_PLAYER_STATE, characters: r, me: hydratePlayer(t, n) }), setLastMageId(t.id), t.id);
 }
-function cU(e, t) {
+function mergeChatLines(e, t) {
   let n = new Set(e.map((e) => e._id)),
     r = e.length ? e[e.length - 1]._creationTime : null,
     i = t
@@ -173,10 +173,10 @@ function cU(e, t) {
         [...e, ...i].sort((e, t) => e._creationTime - t._creationTime),
         100,
         50,
-        Xs(_l().ignored, QH.me?._id ?? ``),
+        Xs(_l().ignored, realmSession.me?._id ?? ``),
       );
 }
-function lU(e, t, n, r) {
+function hydratePlayer(e, t, n, r) {
   let i = t?.level ?? e.level,
     a = t?.maxHp || Re(i),
     o = t && (t.x || t.y) && t.mapVersion === Lr;
@@ -185,7 +185,7 @@ function lU(e, t, n, r) {
     _creationTime: e.created,
     name: e.name,
     school: e.school,
-    hero: aU(t?.hero ?? e.hero),
+    hero: normalizeHeroKind(t?.hero ?? e.hero),
     x: o ? t.x : Fr,
     y: o ? t.y : Ir,
     dir: 0,
@@ -219,16 +219,16 @@ function lU(e, t, n, r) {
     quiver: t?.quiver ?? {},
   };
 }
-function uU(e) {
+function withAffixes(e) {
   return { ...e, affixes: e.affixes ?? [] };
 }
-function dU(e) {
-  return { ...e, school: e.school, items: e.items.map(uU) };
+function normalizeRemains(e) {
+  return { ...e, school: e.school, items: e.items.map(withAffixes) };
 }
-function fU(e) {
+function altarDoc(e) {
   return { _id: `alt:${e.altarId}`, _creationTime: 0, ...e };
 }
-function pU(e, t) {
+function altarRiteEvents(e, t) {
   let n = Il[t.altarId];
   if (!e || !n) return [];
   let r = { spell: t.altarId, x: n.x + 0.5, y: n.y + 0.5 },
@@ -254,7 +254,7 @@ function pU(e, t) {
     a
   );
 }
-function mU(e, t, n, r = {}) {
+function toOwnedItem(e, t, n, r = {}) {
   return {
     _id: e.id,
     _creationTime: 0,
@@ -276,23 +276,23 @@ function mU(e, t, n, r = {}) {
     wear: e.wear,
   };
 }
-var hU = { crowns: 0, dust: 0, shards: 0, motes: 0, chips: 0 };
-function gU(e) {
+var EMPTY_MATS = { crowns: 0, dust: 0, shards: 0, motes: 0, chips: 0 };
+function toInventoryView(e) {
   if (!e.inv || !e.me) return null;
   let t = e.me._id;
   return {
-    bag: e.inv.bag.map((e) => mU(e, t, `bag`)),
-    worn: e.inv.worn.map((e) => mU(e, t, `equipped`, { slot: e.slot })),
-    mats: { ...hU, ...(e.mats ?? {}) },
+    bag: e.inv.bag.map((e) => toOwnedItem(e, t, `bag`)),
+    worn: e.inv.worn.map((e) => toOwnedItem(e, t, `equipped`, { slot: e.slot })),
+    mats: { ...EMPTY_MATS, ...(e.mats ?? {}) },
     bagMax: e.inv.bagMax,
     satchel: e.inv.satchel ?? 0,
     kits: e.me.kits ?? 0,
     quiver: e.me.quiver ?? {},
   };
 }
-var _U = () => Promise.resolve(null);
-function vU(e) {
-  let t = QH.party;
+var noopAsync = () => Promise.resolve(null);
+function applyPartySnapshot(e) {
+  let t = realmSession.party;
   if (t && t.id === e.id && e.v < t.v) return;
   let n = performance.now(),
     r = e.at,
@@ -305,9 +305,9 @@ function vU(e) {
               e.off ? { ...e, offSeen: n - Math.max(0, r - e.off) } : e,
             ),
           };
-  eU({ party: i, partyStats: yU(i, QH.partyStats) });
+  setSession({ party: i, partyStats: prunePartyStats(i, realmSession.partyStats) });
 }
-function yU(e, t) {
+function prunePartyStats(e, t) {
   if (!e) return {};
   let n = new Set(e.members.map((e) => e.id));
   return Object.keys(t).every((e) => n.has(e))

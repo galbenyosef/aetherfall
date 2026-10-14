@@ -78,7 +78,7 @@ var vi = class {
   }
   buildGpu() {
     (this.disposeGpu(),
-      (this.base = Dt()),
+      (this.base = createQuadGeometry()),
       (this.mats = this.atlas.textures.map((e) => {
         let t = {
           map: e,
@@ -102,9 +102,9 @@ var vi = class {
         let i = new we(n, 4);
         (r && i.setUsage(G), t.setAttribute(e, i));
       };
-      (n(K.foot, e.foot, e.bob.length > 0),
-        n(K.rect, e.rect, e.anim.length > 0),
-        n(K.box, e.box, e.anim.length > 0),
+      (n(ATTRIB.foot, e.foot, e.bob.length > 0),
+        n(ATTRIB.rect, e.rect, e.anim.length > 0),
+        n(ATTRIB.box, e.box, e.anim.length > 0),
         (t.instanceCount = e.n));
       let [r, i, a, o, s] = e.b;
       ((t.boundingBox = new Re(new V(r, i, 0), new V(a, o, s))),
@@ -157,13 +157,13 @@ var vi = class {
             (r.box.set([l / 2, d, u - d, 1], n.i * 4), (t = !0));
           }
           t &&
-            ((r.geo.getAttribute(K.rect).needsUpdate = !0),
-            (r.geo.getAttribute(K.box).needsUpdate = !0));
+            ((r.geo.getAttribute(ATTRIB.rect).needsUpdate = !0),
+            (r.geo.getAttribute(ATTRIB.box).needsUpdate = !0));
         }
         if (r.bob.length) {
           for (let e = 0; e < r.bob.length; e += 2)
             r.foot[r.bob[e] * 4 + 2] = r.bob[e + 1] - n;
-          r.geo.getAttribute(K.foot).needsUpdate = !0;
+          r.geo.getAttribute(ATTRIB.foot).needsUpdate = !0;
         }
       }
     }
