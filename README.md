@@ -103,6 +103,7 @@ node tools/derive.mjs --check        # byte-compare a fresh re-cut (write nothin
 node tools/record-manifest.mjs --check  # manifest walk: no derived path leaks
 node tools/verify-rename.mjs --all   # rename map reproduces + references/bindings
 node tools/check-chunk.mjs --all     # cross-slice calls resolve after renames
+node tools/check-exports.mjs         # the derived layer still exports every public name
 ```
 
 ## Updating from upstream
