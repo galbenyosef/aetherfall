@@ -219,12 +219,13 @@
       "file": "assets/fx3d-DiRK8ozf-tail-export.js",
       "skipped": true,
       "title": "fx3d-DiRK8ozf — final export table (not sliced)",
-      "desc": "Lines 31972-32060. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only, and the recorded renameBindings reach its renamed local bindings at reconstruction time.",
+      "desc": "Lines 31972-32060. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only, and the recorded renameBindings reach its renamed local bindings at reconstruction time. The tail records the served chunk's own export statement (assets/fx3d-DiRK8ozf.js) as its text — the statement the reading copy's table must still match.",
       "startLine": 31972,
       "endLine": 32060,
       "sourceFile": "readable/assets/fx3d-DiRK8ozf.pretty.js",
       "firstLine": "export {",
-      "lastLine": "};"
+      "lastLine": "};",
+      "text": "export{l as $,Ni as A,$t as At,p as B,S as C,Oo as Ct,Lo as D,x as Dt,C as E,g as Et,z as F,Po as G,m as H,Ki as I,q as J,Ur as K,Ri as L,Lr as M,tn as Mt,La as N,Ti as O,U as Ot,R as P,Oa as Q,Zi as R,lo as S,Er as St,Mn as T,po as Tt,Ge as U,h as V,oo as W,Yr as X,si as Y,ka as Z,xi as _,We as _t,bu as a,jo as at,No as b,wi as bt,ts as c,jf as createFx3D,ra as ct,Pr as d,It as dt,u as et,So as f,Za as ft,K as g,s as gt,J as h,N as ht,xu as i,jn as it,Fr as j,$a as jt,Fo as k,W as kt,tr as l,Qi as lt,c as m,Da as mt,Su as n,d as nt,eo as o,Eo as ot,oa as p,j as pt,Ft as q,Eu as r,Ya as rt,bi as s,Ao as st,Of as t,f as tt,yr as u,$o as ut,ee as v,Bn as vt,Ze as w,Qt as wt,Xe as x,yi as xt,sa as y,Ea as yt,Xi as z};"
     },
     {
       "file": "assets/hd2d-FOjpdF4f-chunk-machinery.js",
@@ -544,12 +545,13 @@
       "file": "assets/hd2d-FOjpdF4f-tail-export.js",
       "skipped": true,
       "title": "hd2d-FOjpdF4f — final export table (not sliced)",
-      "desc": "Lines 12060-12060. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only, and the recorded renameBindings reach its renamed local bindings at reconstruction time.",
+      "desc": "Lines 12060-12060. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only, and the recorded renameBindings reach its renamed local bindings at reconstruction time. The tail records the served chunk's own export statement (assets/hd2d-FOjpdF4f.js) as its text — the statement the reading copy's table must still match.",
       "startLine": 12060,
       "endLine": 12060,
       "sourceFile": "readable/assets/hd2d-FOjpdF4f.pretty.js",
       "firstLine": "export { fu as createHd2d };",
-      "lastLine": "export { fu as createHd2d };"
+      "lastLine": "export { fu as createHd2d };",
+      "text": "export{fu as createHd2d};"
     },
     {
       "file": "assets/index-BTsv3a2s-chunk-machinery.js",
@@ -2895,12 +2897,13 @@
       "file": "assets/index-BTsv3a2s-tail-export.js",
       "skipped": true,
       "title": "index-BTsv3a2s — final export table (not sliced)",
-      "desc": "Lines 175922-175978. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only, and the recorded renameBindings reach its renamed local bindings at reconstruction time.",
+      "desc": "Lines 175922-175978. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only, and the recorded renameBindings reach its renamed local bindings at reconstruction time. The tail records the served chunk's own export statement (assets/index-BTsv3a2s.js) as its text — the statement the reading copy's table must still match.",
       "startLine": 175922,
       "endLine": 175978,
       "sourceFile": "readable/assets/index-BTsv3a2s.pretty.js",
       "firstLine": "export {",
-      "lastLine": "};"
+      "lastLine": "};",
+      "text": "export{Je as $,Ap as A,Pr as B,fy as C,Lp as D,Wp as E,Ao as F,A as G,kr as H,$o as I,Ht as J,Xn as K,jo as L,Np as M,Mp as N,M as O,hp as P,Zt as Q,Ar as R,cy as S,rm as T,Or as U,Rr as V,Vr as W,nn as X,Xt as Y,Qt as Z,BI as _,b6 as a,zN as b,tse as c,t6 as d,ie as et,r6 as f,zI as g,KW as h,C6 as i,jp as j,Op as k,qoe as l,zJ as m,sse as n,y6 as o,$3 as p,On as q,T6 as r,v6 as s,a8 as t,ae as tt,n6 as u,WL as v,Aee as w,RN as x,qP as y,jr as z};"
     },
     {
       "file": "assets/index-CrHozmsT.css",

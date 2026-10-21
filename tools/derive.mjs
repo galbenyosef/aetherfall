@@ -174,6 +174,55 @@ function markers(text, n = 2) {
 }
 const markerText = (ms) => ms.map(([w, c]) => `${w}(${c})`).join(", ");
 
+// ── the SERVED chunk's own export statement (the export gate's tail) ────
+/**
+ * The public names of an `export { … }` list: the ALIAS, not the local — the
+ * alias is the name the chunk exports.
+ */
+function exportListNames(text) {
+  const out = new Set();
+  for (const m of text.matchAll(/export\s*\{([^}]*)\}/g)) {
+    for (const part of m[1].split(",")) {
+      const seg = part.trim();
+      if (!seg) continue;
+      const as = seg.split(/\s+as\s+/);
+      out.add((as.length === 2 ? as[1] : seg).trim());
+    }
+  }
+  return out;
+}
+
+/**
+ * The SERVED chunk's OWN export statement — the capture-side text the reading
+ * copy's rendered table must still match.
+ *
+ * A skipped tail carries no file: the export list at the end of a chunk
+ * references bindings declared in the earlier slices, so it does not parse
+ * alone and the layer never fabricates it. The public-export-name gate
+ * therefore has no derived text for that table and reports it UNCHECKED —
+ * unless the tail records one. `text` is that text: the capture's own export
+ * statement, so the two sides of the gate's comparison are two DIFFERENT
+ * files (the served chunk's raw statement and the reading copy's rendering of
+ * it) instead of the pristine compared with itself.
+ *
+ * The statement is matched by its PUBLIC NAMES, so a fragment of a string that
+ * happens to contain `export {` is never mistaken for it, and nothing is
+ * invented: when the capture carries no statement with the tail's names, the
+ * tail stays a plain skipped record and the gate keeps reporting it unchecked.
+ */
+function captureExportStatement(captureText, tailText) {
+  const want = exportListNames(tailText);
+  if (!want.size) return null;
+  let found = null;
+  for (const m of captureText.matchAll(/export\s*\{[^}]*\}\s*;?/g)) {
+    const names = exportListNames(m[0]);
+    if (names.size !== want.size) continue;
+    if (![...want].every((n) => names.has(n))) continue;
+    found = m[0];
+  }
+  return found;
+}
+
 // ── windowize: cut only at statement starts; ≤350 lines, a single ───────
 // ── oversized declaration is a window of its own ────────────────────────
 function windowize(stmts) {
@@ -251,7 +300,7 @@ function scanBlocks(buf) {
 // A plan claims statement ranges as wholeFile vendor regions or skipped
 // machinery; every unclaimed statement is windowized into slices. Anchors are
 // asserted against the pretty text so a drifted capture fails loudly.
-function planChunk(rel, tag, stem, stmts, sourceFile) {
+function planChunk(rel, tag, stem, stmts, sourceFile, captureText) {
   const whole = [];
   const skip = [];
   const runs = [];
@@ -264,11 +313,11 @@ function planChunk(rel, tag, stem, stmts, sourceFile) {
     }
     whole.push({ kind: "whole", a, b, file, title, desc });
   };
-  const claimSkip = (i, file, title, desc) => {
+  const claimSkip = (i, file, title, desc, text) => {
     if (i < 0 || i >= stmts.length) throw new Error(`${rel}: bad skip index ${i}`);
     if (covered[i]) throw new Error(`${rel}: skip overlaps at stmt ${i}`);
     covered[i] = true;
-    skip.push({ kind: "skip", a: i, b: i, file, title, desc });
+    skip.push({ kind: "skip", a: i, b: i, file, title, desc, ...(text ? { text } : {}) });
   };
   const assert = (cond, msg) => {
     if (!cond) throw new Error(`${rel}: ${msg}`);
@@ -279,11 +328,16 @@ function planChunk(rel, tag, stem, stmts, sourceFile) {
   };
   const tailExportSkip = (tail) => {
     assert(stmts[tail].node.type === "ExportNamedDeclaration", "chunk does not end in an export table");
+    // the served chunk's OWN export statement — the text the export gate
+    // compares the reading copy's rendered table against. Without it the gate
+    // has no derived text for this table and reports it unchecked.
+    const capExport = captureExportStatement(captureText, stmts[tail].text);
     claimSkip(
       tail,
       `${stem}-tail-export.js`,
       `${tag} — final export table (not sliced)`,
-      `Lines ${stmts[tail].startLine}-${stmts[tail].endLine}. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only, and the recorded renameBindings reach its renamed local bindings at reconstruction time.`,
+      `Lines ${stmts[tail].startLine}-${stmts[tail].endLine}. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only, and the recorded renameBindings reach its renamed local bindings at reconstruction time.${capExport ? ` The tail records the served chunk's own export statement (${rel}) as its text — the statement the reading copy's table must still match.` : ""}`,
+      capExport,
     );
   };
 
@@ -539,7 +593,7 @@ async function main() {
       if (stmts[i].startLine <= stmts[i - 1].endLine)
         throw new Error(`${rel}: statements ${i - 1}/${i} share a line — cannot slice at line boundaries`);
 
-    const { whole, skip, runs } = planChunk(rel, tag, stem, stmts, sourceFile);
+    const { whole, skip, runs } = planChunk(rel, tag, stem, stmts, sourceFile, text);
 
     // blocks in line order, then re-tile so every line of the pretty is owned
     const blocks = [];
@@ -629,6 +683,11 @@ async function main() {
           sourceFile,
           firstLine: lines[b.A - 1],
           lastLine: lines[b.B - 1],
+          // the served chunk's own export statement, when this tail carries
+          // one — the text the public-export-name gate compares the reading
+          // copy's rendering against. A tail with no export table has nothing
+          // to record and stays a plain index-only record.
+          ...(b.text ? { text: b.text } : {}),
         });
       }
     }
