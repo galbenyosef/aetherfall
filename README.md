@@ -65,6 +65,14 @@ AETHERFALL — "an epic pixel-art fantasy MMO RPG" (manifest.webmanifest), title
 - `tools/record-manifest.mjs` — re-walk/re-check the Gen-A manifest (canonical
   SKIP/NOT_CAPTURED sets; `--check` proves no derived path leaks)
 - `tools/audit.js` — integrity gate for the derived layers (`AUDIT PASS`)
+- `tools/check-links.mjs` — the export-binding link gate: does every export
+  table the layer carries name a binding the layer declares? The engine
+  (`node --input-type=module --check -`) is the judge. The three app chunks'
+  export tables live in RECORDED TAILS (`split-spec.json` `sections[].text`),
+  not in files on disk, and they are in the CAPTURE's spelling, so the gate
+  rewrites them into the layer's spelling with the recorded rename map before
+  it asks the engine. A table that names a binding a SIBLING slice declares
+  is a FRAGMENT, not a defect.
 - `tools/serve.mjs` — static server for the boot/serve probe (default port 4325)
 - `legacy/2026-10-14/` — the superseded derived layers, byte-exact (proposal (o):
   the flattened 2026-10-12 `readable/` + `src/` and the pre-rename slices)
@@ -104,6 +112,7 @@ node tools/record-manifest.mjs --check  # manifest walk: no derived path leaks
 node tools/verify-rename.mjs --all   # rename map reproduces + references/bindings
 node tools/check-chunk.mjs --all     # cross-slice calls resolve after renames
 node tools/check-exports.mjs         # the derived layer still exports every public name
+node tools/check-links.mjs           # every export table names a binding the layer declares (fragments are reported, breaks fail)
 ```
 
 ## Updating from upstream
