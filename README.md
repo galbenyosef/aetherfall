@@ -339,11 +339,12 @@ The capture carries exactly four export tables, one per JS chunk
 chunk's own statement) and compared against the reading copy's table.
 
 The fourth — the GLTFLoader addon chunk's `export { ke as GLTFLoader }` — is the one
-the gate reports as NOT covered. **It is load-bearing:** the hd2d chunk
-dynamic-imports it and consumes its export
-(`import("./GLTFLoader-MfgfXc7d.js").then(e => ({ GLTFLoader: e }))`), and the chunk
-is listed in the `__vite__mapDeps` tables of both hd2d and index — so `GLTFLoader`
-is public, not dead weight.
+the gate reports as NOT covered. **It is load-bearing:** the hd2d chunk names it as
+entry 0 of its `__vite__mapDeps` table (`"assets/GLTFLoader-MfgfXc7d.js"`, pretty
+line 6) and dynamic-imports it for the export (``await import(`./GLTFLoader-MfgfXc7d.js`)``
+bar `return { GLTFLoader: e }`, pretty lines 2429-2430); the entry chunk's own
+`__vite__mapDeps` table lists only hd2d and fx3d, so hd2d is the importer —
+`GLTFLoader` is public, not dead weight.
 
 **Why the gate cannot reach it.** The vendor rule carries this third-party chunk
 whole in `readable/` and never slices it, so `src/` has no text for the chunk and
