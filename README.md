@@ -102,6 +102,14 @@ served from `localhost` the bundle allows a dev gate override — `?gate=https:/
 — and a zone override `?zone=off` / `?zone=<url>`, both by design of the shipped
 client; neither substitutes for the missing backend.
 
+## Boot test (2026-10-27)
+
+- Entry: `http://127.0.0.1:4707/` served by `tools/serve.mjs` with the network blocked (`MAP * 127.0.0.1`).
+- Outcome: **rendered** — the pixel-art title screen (*Chronicles of the Shattered Veil*, AETHERFALL, "PRESS ANY KEY", v0.7.16) renders over a live animated starfield; gameplay is still refused because the gate call is blocked.
+- Evidence: body 100 chars; canvas 1263x570; 1 console error; 0 failed same-origin requests, 4 blocked cross-origin; screenshot `docs/boot-2026-10-27.png`.
+- Gaps seen: none — all 23 same-origin boot requests answered 200; the 4 blocked cross-origin are Google Fonts, the Cloudflare Insights beacon, and the AWS gate `OPTIONS`/`POST /v1/guest` (expected under the offline rule).
+- Hypothesis check: the README's "playable build absent/gated" claim is **refuted for "absent"** — the build is present and boots/renders offline from this mirror — and **confirmed for "gated"**: the boot's own `POST /v1/guest` is cross-origin and blocked. The title screen already posts to the live gate, so per the boot rule the run stopped at the menu rather than clicking through.
+
 ## Verify
 
 ```
