@@ -142,6 +142,72 @@ rename pipeline (`apply → recover → derive → gates`) with the review list 
 to the new build; a stale map fails loudly (derive/audit refuse), it never
 mis-renames silently.
 
+### 2026-10-31 refresh probe — real drift, refresh refused (derive plan is pinned to the old build)
+
+The drift probe reports a genuine new deployment, and the refresh is **refused**
+at the mirror's own derive step; the capture is untouched.
+
+```
+$ node tools/update.mjs
+DRIFT: 1 changed, 5 live-missing, 0 html-fallback (of 71 captured)
+  live-missing   assets/GLTFLoader-MfgfXc7d.js
+  live-missing   assets/fx3d-DiRK8ozf.js
+  live-missing   assets/hd2d-FOjpdF4f.js
+  live-missing   assets/index-BTsv3a2s.js
+  live-missing   assets/index-CrHozmsT.css
+  changed        index.html
+```
+
+- **Classification: real content drift**, not Cloudflare token noise. The entry
+  diff left, after the probe's own normalization of the rotating Insights tag
+  (beacon `token` unchanged), is the build: `/assets/index-BTsv3a2s.js` →
+  `/assets/index-DRRAfRbf.js` (2,945,491 → 3,217,370 B) and
+  `/assets/index-CrHozmsT.css` → `/assets/index-G2agB6HL.css` (185,608 →
+  194,185 B). The old hashed chunks are gone (normal for a Vite deploy, not a
+  dead origin: the new ones answer 200). The other three chunks are rehashed —
+  as served they differ from the capture **only** in the chunk-name references
+  (`fx3d` 668,510 B, `GLTFLoader` 45,220 B: same length; `hd2d` 238,932 →
+  238,930 B) — and React `19.3.0` / three.js `r186` (`revision: '186'`) are
+  unchanged, so this is a rebuild of the same stack, not a stack change.
+- **Trust gate: the fetch path is trusted.** All 65 still-served captured files
+  re-hash byte-identical upstream; the 5 live-missing entries are exactly the
+  superseded hashed names. Nothing on the origin has drifted in place.
+- **Closure of the new build** (read-only scan of the new entry + chunks):
+  80 hashed `/assets/…` references vs 60 in the capture — the same 13 sprite
+  PNGs under unchanged hashes, **21 new project sprites** (17 `fx.lillith_*`
+  and 4 `prop.*`), the same 41 `.glb` LFS pointer stubs under unchanged names,
+  and the same four audio tracks (`marizon_fight`/`marizon_idle`/`title_theme`/
+  `start_chime`). A refresh would be ~92 captured files.
+- **Blocker — `tools/derive.mjs` refuses the new build** (measured in a
+  throwaway copy under the gitignored `tmp/`, with the new chunks + a scratch
+  manifest):
+
+  ```
+  $ node tools/derive.mjs
+  derive: rename map: 41 word-boundary file(s), 5 indexed file(s)
+  Error: assets/GLTFLoader-BSuq1M9G.js: no block plan recorded for this chunk — a new capture chunk needs a plan
+  ```
+
+  The derive plan addresses chunks **by served filename**
+  (`assets/index-BTsv3a2s.js` → machinery head + React vendor region + app run,
+  `assets/fx3d-DiRK8ozf.js` → bundled three.js region,
+  `assets/hd2d-FOjpdF4f.js` → mapDeps head, `assets/GLTFLoader-MfgfXc7d.js` →
+  whole-file vendor) and `tools/audit.js` re-checks those same names
+  (`assets/index-BTsv3a2s-react-vendor.js`, …). The new hashes fall through to
+  `planChunk`'s "no block plan recorded" branch. Writing the new capture first
+  would leave `readable/`, `src/` and `split-spec.json` describing files the new
+  build no longer serves, and every derived gate red (`derive --check`,
+  `audit`, `verify-rename`, `check-chunk`, `check-links`).
+- **Why it is not done here:** the fix is a tools change — the plan must
+  discover chunk roles by content (entry = the chunk `index.html` loads; the
+  renderer/addon chunks by their `__vite__mapDeps` role and vendor guards) — and
+  then the 115-name / 883-splice rename campaign has to be re-run against the
+  new slices (`apply → recover → derive → gates`). That is the recorded next
+  lane, not a 10-minute pass. **No capture bytes were written**; `verify.mjs`
+  still reports `71 files checked, 0 problems` and the boot evidence stays
+  `docs/boot-2026-10-27.png`, both of which remain true because nothing in the
+  capture changed.
+
 ### 2026-10-12 readable/src derivation
 
 Both derived layers are in place, cut from the recorded capture (capture bytes
