@@ -463,3 +463,8 @@ as the next sub-task for the tools lane; until then the uncovered count is hones
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 289 | aetherfall | mirror | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
 <!-- mirror-status:end -->
+
+
+## Snapshot policy (2026-10-31)
+
+Frozen point-in-time snapshot - deliberate, fleet decision 2026-10-31. New Vite build; tools/derive.mjs plans chunks by served filename and tools/audit.js re-checks those same names, so a refresh needs role discovery by content plus a re-run of the 115-name rename campaign. The capture stays byte-exact and boots offline; a refresh needs a full re-capture/re-derive campaign (a new mirror, not a refresh), so the mirror is declared frozen rather than left looking stale. Re-review if the origin serves the old build again.
